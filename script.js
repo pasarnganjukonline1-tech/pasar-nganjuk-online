@@ -817,10 +817,10 @@ document.getElementById("checkoutForm").addEventListener(
 async function ambilProdukSupabase() {
     try {
         const { data, error } = await supabaseClient
-            .from("produk")
-            .select("*")
-            .order("created_at", { ascending: false });
-
+           .from("produk")
+.select("*")
+.eq("status", "aktif")
+.order("created_at", { ascending: false });
         if (error) throw error;
 
         if (data && data.length > 0) {
