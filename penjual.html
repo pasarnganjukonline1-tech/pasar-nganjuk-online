@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Penjual - Pasar Nganjuk Online</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            display: none;
+        }
+
+        .order-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .order-card h3 {
+            margin-top: 0;
+        }
+
+        .order-status {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .order-product {
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .order-total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0879d9;
+        }
+
+        .order-refresh {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="seller-header">
+        <h2>🏪 Dashboard Penjual</h2>
+        <a href="index.html">← Kembali ke Beranda</a>
+    </header>
+
+    <!-- DASHBOARD -->
+    <main class="seller-dashboard">
+
+        <h1>Kelola Toko Saya</h1>
+
+        <p>
+            Tambahkan produk dan kelola pesanan
+            di Pasar Nganjuk Online.
+        </p>
+
+        <!-- INFORMASI TOKO -->
+        <section class="seller-card">
+
+            <h2>Informasi Toko</h2>
+
+            <label for="namaToko">Nama Toko</label>
+            <input
+                id="namaToko"
+                type="text"
+                placeholder="Contoh: Toko Berkah"
+                autocomplete="organization"
+            >
+
+            <label for="pemilikToko">Nama Pemilik</label>
+            <input
+                id="pemilikToko"
+                type="text"
+                placeholder="Nama pemilik toko"
+                autocomplete="name"
+            >
+
+            <label for="lokasiToko">Lokasi Kecamatan</label>
+            <input
+                id="lokasiToko"
+                type="text"
+                placeholder="Contoh: Nganjuk"
+            >
+
+            <label>Nomor WhatsApp Toko</label>
+
+            <label>Deskripsi Toko</label>
+<textarea
+    id="deskripsiToko"
+    rows="4"
+    placeholder="Ceritakan tentang toko dan produk yang kamu jual..."
+></textarea>
+<input
+    type="tel"
+    id="whatsappToko"
+    placeholder="Contoh: 6281234567890"
+>
+
+
+<label>Foto Profil Toko</label>
+<input
+    type="file"
+    id="fotoProfilToko"
+    accept="image/*"
+>
+
+<label>Banner Toko</label>
+<input
+    type="file"
+    id="bannerToko"
+    accept="image/*"
+>
+
+
+            <button type="button" onclick="simpanToko()">
+                Simpan Informasi Toko
+            </button>
+
+            <p id="pesanToko"></p>
+
+        </section>
+
+        <!-- TAMBAH PRODUK -->
+        <section class="seller-card">
+
+            <h2>Tambah Produk</h2>
+
+            <label for="namaProduk">Nama Produk</label>
+            <input
+                id="namaProduk"
+                type="text"
+                placeholder="Nama produk"
+            >
+
+            <label for="hargaProduk">Harga Produk</label>
+            <input
+                id="hargaProduk"
+                type="number"
+                min="1"
+                placeholder="Contoh: 50000"
+            >
+            <label for="kategoriProduk">Kategori Produk</label>
+<select id="kategoriProduk" required>
+    <option value="Makanan & Minuman">🍜 Makanan & Minuman</option>
+    <option value="Fashion">👕 Fashion</option>
+    <option value="Elektronik">📱 Elektronik</option>
+    <option value="Rumah Tangga">🏠 Rumah Tangga</option>
+    <option value="Kecantikan">💄 Kecantikan</option>
+    <option value="Pertanian">🌾 Pertanian</option>
+    <option value="Otomotif">🚗 Otomotif</option>
+    <option value="Lainnya" selected>📦 Lainnya</option>
+</select>
+
+            <label for="deskripsiProduk">Deskripsi Produk</label>
+            <textarea
+                id="deskripsiProduk"
+                rows="4"
+                placeholder="Jelaskan detail produk, bahan, ukuran, rasa, dan keunggulannya..."
+            ></textarea>
+
+            <label for="fotoProduk">Foto Produk</label>
+            <input
+                id="fotoProduk"
+                type="file"
+                accept="image/*"
+            >
+
+            <button type="button" onclick="tambahProdukPenjual()">
+                Tambah Produk
+            </button>
+
+            <p id="pesanProduk"></p>
+
+        </section>
+
+        <!-- DAFTAR PRODUK -->
+        <section class="seller-card">
+
+            <h2>Produk Toko Saya</h2>
+
+            <div id="daftarProdukPenjual"></div>
+
+        </section>
+
+        <!-- PESANAN MASUK -->
+        <section class="seller-card">
+
+            <h2>📦 Pesanan Masuk</h2>
+
+            <p>
+                Daftar pesanan COD dari pembeli
+                yang memesan produk toko kamu.
+            </p>
+
+            <button
+                type="button"
+                class="order-refresh"
+                onclick="muatPesananPenjual()"
+            >
+                🔄 Muat Ulang Pesanan
+            </button>
+
+            <div id="pesanPesanan"></div>
+            <div id="notifikasiPesanan"></div>
+
+            <div id="daftarPesananPenjual">
+                <p>Memuat pesanan...</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <!-- PEMERIKSAAN LOGIN -->
+    <script>
+        async function cekLoginPenjual() {
+            try {
+                const { data, error } =
+                    await supabaseClient.auth.getSession();
+
+                if (error || !data.session) {
+                    window.location.replace("login-penjual.html");
+                    return;
+                }
+
+                document.body.style.display = "block";
+
+            } catch (error) {
+                console.error("Gagal memeriksa login:", error);
+                window.location.replace("login-penjual.html");
+            }
+        }
+
+        cekLoginPenjual();
+    </script>
+
+    <!-- JAVASCRIPT DASHBOARD -->
+    <script src="penjual.js"></script>
+
+
+    
+</body>
+</html>
+

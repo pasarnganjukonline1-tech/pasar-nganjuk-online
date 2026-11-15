@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detail Toko - Pasar Nganjuk Online</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    
+
+<header class="header-toko">
+    <h2>Pasar Nganjuk Online</h2>
+
+    <div class="navigasi-toko">
+        <a href="index.html">← Beranda</a>
+
+       <button type="button"
+    id="tombolBukaKeranjangToko"
+    onclick="window.location.href='keranjang.html'">
+    🛒 Keranjang
+    <span id="jumlahKeranjangToko">0</span>
+</button>
+    </div>
+</header>
+
+
+
+    <main class="halaman-toko">
+
+        <section id="profilToko">
+            <p>Memuat informasi toko...</p>
+        </section>
+
+       <section class="produk-toko">
+    <h2>Produk dari Toko Ini</h2>
+
+    <input
+        type="text"
+        id="cariProdukToko"
+        placeholder="🔍 Cari produk di toko ini..."
+    >
+    <select id="filterKategoriToko">
+    <option value="">Semua Kategori</option>
+    <option value="Makanan & Minuman">Makanan & Minuman</option>
+    <option value="Fashion">Fashion</option>
+    <option value="Elektronik">Elektronik</option>
+    <option value="Rumah Tangga">Rumah Tangga</option>
+    <option value="Kecantikan">Kecantikan</option>
+    <option value="Pertanian">Pertanian</option>
+    <option value="Otomotif">Otomotif</option>
+    <option value="Lainnya">Lainnya</option>
+</select>
+
+<select id="urutkanProdukToko">
+    <option value="terbaru">Produk Terbaru</option>
+    <option value="termurah">Harga Termurah</option>
+    <option value="termahal">Harga Termahal</option>
+    <option value="nama">Nama Produk A-Z</option>
+</select>
+
+    <div id="daftarProdukToko">
+        <p>Memuat produk...</p>
+    </div>
+</section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="toko.js"></script>
+
+</body>
+</html>

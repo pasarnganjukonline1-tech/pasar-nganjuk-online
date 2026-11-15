@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pasar Nganjuk Online</title>
+
+    <meta name="description" content="Marketplace produk lokal Nganjuk. Belanja mudah, lokal mendunia.">
+
+    <meta name="theme-color" content="#0759a5">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER ATAS -->
+    <div class="topbar">
+        <div>📍 Nganjuk, Jawa Timur</div>
+        <div>🚚 selamat datang </div>
+        <div class="top-links">
+            <a href="#">Bantuan</a>
+            <a href="#">Tentang Kami</a>
+            <a href="#">Hubungi Kami</a>
+        </div>
+    </div>
+
+    <!-- HEADER UTAMA -->
+    <header class="main-header">
+
+        <div class="logo">
+            <span class="logo-icon">🛍️</span>
+            <div>
+                <h1>Pasar Nganjuk <span>Online</span></h1>
+                <small>Belanja Mudah, Lokal Mendunia</small>
+            </div>
+        </div>
+
+        <div class="search-urutan-wrapper">
+
+    <div class="search-box">
+        <input
+            id="searchInput"
+            type="search"
+            placeholder="Cari produk atau toko..."
+        >
+        <button aria-label="Cari">🔍</button>
+    </div>
+
+    <div class="filter-urutan">
+        <label for="urutkanProduk">Urutkan:</label>
+        <select id="urutkanProduk">
+            <option value="terbaru">Terbaru</option>
+            <option value="termurah">Termurah</option>
+            <option value="termahal">Termahal</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="header-actions">
+    <a href="keranjang.html">🛒 Keranjang</a>
+    <a href="#">👤 Masuk / Daftar</a>
+</div>
+
+    </header>
+</div>
+
+    <!-- NAVIGASI DESKTOP -->
+<nav class="main-nav">
+    <a href="#">☰ Semua Kategori</a>
+    <a href="#" class="active">⌂ Beranda</a>
+    <a href="#">Produk Terlaris</a>
+    <a href="#">Promo</a>
+    <a href="#">Toko Populer</a>
+    <a href="#">Kategori Lainnya</a>
+    <a href="riwayat-pesanan.html">📦 Cek Pesanan</a>
+
+    <!-- MENU PENJUAL -->
+    <a href="penjual.html">🏪 Jualan di Sini</a>
+</nav>
+    <main>
+
+        <!-- BANNER UTAMA -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Pasar Nganjuk Online</h2>
+                <h3>Belanja Online<br>Produk Lokal Nganjuk</h3>
+                <p>Mudah • Aman • Terpercaya</p>
+                <button>Belanja Sekarang →</button>
+            </div>
+        </section>
+
+        <!-- KATEGORI -->
+        <section class="category-section">
+            <h2>Kategori Pilihan</h2>
+
+            
+
+<div class="categories">
+    <div class="category-item" data-category="Makanan & Minuman">🍜<p>Makanan & Minuman</p></div>
+    <div class="category-item" data-category="Fashion">👕<p>Fashion</p></div>
+    <div class="category-item" data-category="Elektronik">📱<p>Elektronik</p></div>
+    <div class="category-item" data-category="Rumah Tangga">🏠<p>Rumah Tangga</p></div>
+    <div class="category-item" data-category="Kecantikan">💄<p>Kecantikan</p></div>
+    <div class="category-item" data-category="Pertanian">🌾<p>Pertanian</p></div>
+    <div class="category-item" data-category="Otomotif">🚗<p>Otomotif</p></div>
+    <div class="category-item" data-category="Lainnya">📦<p>Lainnya</p></div>
+</div>
+<button id="semuaProduk" class="btn-semua-produk">
+    Semua Produk
+</button>
+
+
+        </section>
+
+        <!-- KONTEN MARKETPLACE -->
+        <section class="marketplace-content">
+
+            <div class="product-section">
+                <div class="section-title">
+                    <h2>⭐ Produk Terbaru</h2>
+                    <a href="#">Lihat Semua →</a>
+                </div>
+
+                <div class="products" id="products">
+                    <!-- Produk akan dimuat melalui JavaScript -->
+                </div>
+            </div>
+
+            <div class="promo-section">
+                <div class="section-title">
+                    <h2>Promo Pilihan</h2>
+                </div>
+
+                <div class="promo-banner">
+                    <h2>DISKON SPESIAL</h2>
+                    <h3>Hingga 50%</h3>
+                    <p>Belanja produk lokal sekarang!</p>
+                </div>
+            </div>
+
+            <div class="store-section">
+                <div class="section-title">
+                    <h2>Toko Populer</h2>
+                </div>
+
+                <div class="popular-stores">
+                    <div>🏪 Nganjuk Craft</div>
+                    <div>🛒 Toko Sumber Rejeki</div>
+                    <div>👨‍🍳 Dapur Mak Nyus</div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+<!-- NAVIGASI KHUSUS HP -->
+<nav class="mobile-nav">
+    <a href="#" class="active">🏠<span>Beranda</span></a>
+    <a href="#">🔎<span>Cari</span></a>
+    <a href="#">📂<span>Kategori</span></a>
+    <a href="keranjang.html">🛒<span>Keranjang</span></a>
+    <a href="riwayat-pesanan.html">📦<span>Cek Pesanan</span></a>
+    <a href="penjual.html">🏪<span>Jualan</span></a>
+</nav>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Pasar Nganjuk Online © 2026</p>
+        <p>Bangga Belanja Produk Lokal Nganjuk</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

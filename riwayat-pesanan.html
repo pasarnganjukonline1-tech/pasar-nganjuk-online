@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Pesanan - Pasar Nganjuk Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header-toko">
+        <h2>Pasar Nganjuk Online</h2>
+        <div class="navigasi-toko">
+            <a href="index.html">← Kembali ke Beranda</a>
+        </div>
+    </header>
+
+    <main class="halaman-toko">
+        <h2>📦 Cek Pesanan Saya</h2>
+
+        <div class="checkout-keranjang">
+            <p>Masukkan kode pesanan dan nomor WhatsApp yang digunakan saat memesan.</p>
+
+            <form id="formCekPesanan">
+                <label>Kode Pesanan</label>
+                <input
+                    type="text"
+                    id="kodePesanan"
+                    placeholder="Contoh: PNO-1794736099997"
+                    required
+                >
+
+                <label>Nomor WhatsApp</label>
+                <input
+                    type="tel"
+                    id="whatsappPesanan"
+                    placeholder="081234567890"
+                    required
+                >
+
+                <button type="submit" id="tombolCekPesanan">
+                    Cek Pesanan
+                </button>
+
+                <p id="pesanCekPesanan"></p>
+            </form>
+        </div>
+
+        <div id="hasilPesanan"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="riwayat-pesanan.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja - Pasar Nganjuk Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header-toko">
+        <h2>Pasar Nganjuk Online</h2>
+
+        <div class="navigasi-toko">
+            <a href="index.html">← Lanjut Belanja</a>
+        </div>
+    </header>
+
+    <main class="halaman-toko">
+
+        <h2>🛒 Keranjang Belanja</h2>
+
+        <!-- DAFTAR KERANJANG -->
+        <div id="daftarKeranjang">
+            <p>Memuat keranjang...</p>
+        </div>
+
+        <!-- FORM CHECKOUT COD -->
+        <div class="checkout-keranjang">
+
+            <h2>Data Pemesanan</h2>
+
+            <form id="checkoutForm">
+
+                <label for="nama">Nama lengkap</label>
+                <input id="nama" name="nama" type="text"
+                    placeholder="Masukkan nama lengkap" required>
+
+                <label for="whatsapp">Nomor WhatsApp</label>
+                <input id="whatsapp" name="whatsapp" type="tel"
+                    placeholder="081234567890" required>
+
+                <label for="alamat">Alamat lengkap</label>
+                <textarea id="alamat" name="alamat"
+                    placeholder="Nama jalan, RT/RW, desa atau kelurahan"
+                    required></textarea>
+
+                <label for="kecamatan">Kecamatan</label>
+                <input id="kecamatan" name="kecamatan" type="text"
+                    placeholder="Nama kecamatan" required>
+
+                <label for="catatan">Catatan pesanan (opsional)</label>
+                <textarea id="catatan" name="catatan"
+                    placeholder="Catatan tambahan"></textarea>
+
+                <p><strong>Metode pembayaran:</strong> COD</p>
+                <p>Bayar saat barang diterima.</p>
+
+                <button type="submit" id="tombolCheckout">
+                    Buat Pesanan COD
+                </button>
+
+                <p id="checkoutMessage"></p>
+
+            </form>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="keranjang.js"></script>
+
+</body>
+</html>

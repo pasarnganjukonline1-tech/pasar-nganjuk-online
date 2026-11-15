@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akun Penjual - Pasar Nganjuk Online</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container {
+            max-width: 420px;
+            margin: 40px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 18px #00000015;
+        }
+        .auth-container h2 { color: #0759a5; }
+        .auth-container input {
+            width: 100%;
+            padding: 13px;
+            margin: 8px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .auth-container button {
+            width: 100%;
+            padding: 13px;
+            background: #0759a5;
+            color: white;
+            border: 0;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        #pesan { font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2>Akun Penjual</h2>
+        <p>Daftar atau masuk untuk mulai berjualan.</p>
+
+        <label>Alamat Email</label>
+        <input type="email" id="email" placeholder="nama@email.com">
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Minimal 6 karakter">
+
+        <button onclick="daftarPenjual()">Daftar Akun</button>
+        <button onclick="loginPenjual()">Login</button>
+
+        <p id="pesan"></p>
+        <a href="index.html">← Kembali ke Beranda</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script>
+        async function daftarPenjual() {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            if (!email || password.length < 6) {
+                document.getElementById("pesan").textContent =
+                    "Masukkan email dan password minimal 6 karakter.";
+                return;
+            }
+
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                document.getElementById("pesan").textContent = error.message;
+                return;
+            }
+
+            document.getElementById("pesan").textContent =
+                "Pendaftaran berhasil. Periksa email jika diminta melakukan konfirmasi.";
+        }
+
+        async function loginPenjual() {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                document.getElementById("pesan").textContent = error.message;
+                return;
+            }
+
+            window.location.href = "penjual.html";
+        }
+    </script>
+
+</body>
+</html>
