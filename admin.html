@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Pasar Nganjuk Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                PASAR NGANJUK<br>ONLINE
+            </div>
+
+            <nav class="admin-nav">
+                <button id="btnDashboard" class="active">Dashboard</button>
+                <button id="btnToko">Kelola Toko</button>
+                <button id="btnProduk">Kelola Produk</button>
+                <button id="btnPesanan">Kelola Pesanan</button>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+
+            <header class="admin-topbar">
+                <div>
+                    <h1>Dashboard Admin</h1>
+                    <p>Selamat datang di pengelolaan marketplace.</p>
+                </div>
+
+                <button id="btnLogout" class="admin-logout">
+                    Keluar
+                </button>
+            </header>
+
+            <section class="admin-stats">
+                <div class="admin-stat-card">
+    <div class="stat-icon">🏪</div>
+    <p>Total Toko</p>
+    <h2 id="totalToko">-</h2>
+</div>
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon">📦</div>
+                    <p>Total Produk</p>
+                    <h2 id="totalProduk">-</h2>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon">🛒</div>
+                    <p>Total Pesanan</p>
+                    <h2 id="totalPesanan">-</h2>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon">✅</div>
+                    <p>Toko Aktif</p>
+                    <h2 id="tokoAktif">-</h2>
+                </div>
+            </section>
+
+            <section class="admin-panel">
+                <h3>Menu Pengelolaan</h3>
+
+                <div class="admin-menu">
+                    <button id="btnMenuToko">Kelola Toko Vendor</button>
+                    <button id="btnMenuProduk">Kelola Produk</button>
+                </div>
+            </section>
+
+            <section class="admin-panel" id="areaAdmin">
+                <h3>Memeriksa akses admin...</h3>
+            </section>
+
+        </main>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+
+</body>
+</html>

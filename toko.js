@@ -62,11 +62,12 @@ async function muatDetailToko() {
 
     try {
         // AMBIL PROFIL TOKO
-        const { data: toko, error: tokoError } = await supabaseClient
-            .from("toko")
-            .select("*")
-            .eq("id", tokoId)
-            .single();
+       const { data: toko, error: tokoError } = await supabaseClient
+    .from("toko")
+    .select("*")
+    .eq("id", tokoId)
+    .eq("status", "aktif")
+    .single();
 
         if (tokoError) throw tokoError;
 
@@ -119,10 +120,11 @@ profil.innerHTML = `
 
         // AMBIL PRODUK TOKO
         const { data: produk, error: produkError } = await supabaseClient
-            .from("produk")
-            .select("*")
-            .eq("toko_id", tokoId)
-           .order("created_at", { ascending: false });
+    .from("produk")
+    .select("*")
+    .eq("toko_id", tokoId)
+    .eq("status", "aktif")
+    .order("created_at", { ascending: false });
 
 if (produkError) throw produkError;
 

@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hubungi Kami - Pasar Nganjuk Online</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f6fc;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0878d1, #0755a5);
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 25px;
+        }
+
+        .judul {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .judul h2 {
+            color: #0878d1;
+            font-size: 26px;
+        }
+
+        .judul p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .daftar-kontak {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .kontak {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e8eef5;
+        }
+
+        .ikon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .kontak h3 {
+            margin: 5px 0 12px;
+            color: #0878d1;
+        }
+
+        .kontak p {
+            line-height: 1.6;
+            color: #666;
+            overflow-wrap: anywhere;
+        }
+
+        .kontak a {
+            color: #0878d1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .tombol-wa {
+            display: inline-block;
+            background: #25D366;
+            color: white !important;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-top: 8px;
+            transition: 0.2s;
+        }
+
+        .tombol-wa:hover {
+            background: #1da851;
+        }
+
+        .tombol-email {
+            display: inline-block;
+            background: #0878d1;
+            color: white !important;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        .kembali {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 13px 22px;
+            background: #0878d1;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .kembali:hover {
+            background: #0755a5;
+        }
+
+        footer {
+            background: #0755a5;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 35px 15px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            main {
+                margin: 15px auto;
+                padding: 15px;
+            }
+
+            .daftar-kontak {
+                grid-template-columns: 1fr;
+            }
+
+            .judul h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Hubungi Kami</h1>
+    <p>Pasar Nganjuk Online</p>
+</header>
+
+<main>
+
+    <div class="judul">
+        <h2>Kami Siap Membantu Anda</h2>
+
+        <p>
+            Punya pertanyaan, mengalami kendala, atau ingin
+            memberikan masukan? Jangan ragu untuk menghubungi
+            tim Pasar Nganjuk Online.
+        </p>
+    </div>
+
+    <div class="daftar-kontak">
+
+        <!-- LOKASI -->
+        <div class="kontak">
+            <div class="ikon">📍</div>
+            <h3>Lokasi Kami</h3>
+            <p>
+                Nganjuk, Jawa Timur, Indonesia
+            </p>
+        </div>
+
+        <!-- WHATSAPP -->
+        <div class="kontak">
+            <div class="ikon">📱</div>
+            <h3>WhatsApp</h3>
+            <p>
+                082139546090
+            </p>
+
+            <a
+                href="https://wa.me/6282139546090"
+                class="tombol-wa"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Chat WhatsApp
+            </a>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="kontak">
+            <div class="ikon">📧</div>
+            <h3>Email Resmi</h3>
+            <p>
+                pasarnganjukonline1@gmail.com
+            </p>
+
+            <a
+                href="mailto:pasarnganjukonline1@gmail.com"
+                class="tombol-email"
+            >
+                Kirim Email
+            </a>
+        </div>
+
+        <!-- BANTUAN -->
+        <div class="kontak">
+            <div class="ikon">💬</div>
+            <h3>Pusat Bantuan</h3>
+            <p>
+                Temukan informasi mengenai cara berbelanja,
+                menggunakan layanan, dan menjadi penjual.
+            </p>
+
+            <a href="bantuan.html">
+                Kunjungi Pusat Bantuan →
+            </a>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="kembali">
+        ← Kembali ke Beranda
+    </a>
+
+</main>
+
+<footer>
+    <p>© 2026 Pasar Nganjuk Online</p>
+    <p>Belanja Lokal, Dukung UMKM Nganjuk</p>
+</footer>
+
+</body>
+</html>

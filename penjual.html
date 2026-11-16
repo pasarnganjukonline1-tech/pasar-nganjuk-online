@@ -69,72 +69,96 @@
             Tambahkan produk dan kelola pesanan
             di Pasar Nganjuk Online.
         </p>
-
-        <!-- INFORMASI TOKO -->
-        <section class="seller-card">
-
-            <h2>Informasi Toko</h2>
-
-            <label for="namaToko">Nama Toko</label>
-            <input
-                id="namaToko"
-                type="text"
-                placeholder="Contoh: Toko Berkah"
-                autocomplete="organization"
-            >
-
-            <label for="pemilikToko">Nama Pemilik</label>
-            <input
-                id="pemilikToko"
-                type="text"
-                placeholder="Nama pemilik toko"
-                autocomplete="name"
-            >
-
-            <label for="lokasiToko">Lokasi Kecamatan</label>
-            <input
-                id="lokasiToko"
-                type="text"
-                placeholder="Contoh: Nganjuk"
-            >
-
-            <label>Nomor WhatsApp Toko</label>
-
-            <label>Deskripsi Toko</label>
-<textarea
-    id="deskripsiToko"
-    rows="4"
-    placeholder="Ceritakan tentang toko dan produk yang kamu jual..."
-></textarea>
-<input
-    type="tel"
-    id="whatsappToko"
-    placeholder="Contoh: 6281234567890"
+<!-- STATUS VERIFIKASI TOKO -->
+<section
+    id="areaStatusToko"
+    class="seller-card"
+    style="display:none;"
 >
+    <h2>Status Toko</h2>
+    <div id="isiStatusToko"></div>
+</section>
 
+    
+<!-- INFORMASI TOKO -->
 
-<label>Foto Profil Toko</label>
-<input
-    type="file"
-    id="fotoProfilToko"
-    accept="image/*"
+<!-- STATUS VERIFIKASI TOKO -->
+<section
+    id="areaStatusToko"
+    class="seller-card"
+    style="display:none;"
 >
+    <h2>Status Toko</h2>
+    <div id="isiStatusToko"></div>
+</section>
 
-<label>Banner Toko</label>
-<input
-    type="file"
-    id="bannerToko"
-    accept="image/*"
->
+<!-- FORM PENDAFTARAN TOKO -->
+<div id="areaPendaftaranToko">
 
+    <section class="seller-card">
 
-            <button type="button" onclick="simpanToko()">
-                Simpan Informasi Toko
-            </button>
+        <h2>Informasi Toko</h2>
 
-            <p id="pesanToko"></p>
+        <label for="namaToko">Nama Toko</label>
+        <input
+            id="namaToko"
+            type="text"
+            placeholder="Contoh: Toko Berkah"
+            autocomplete="organization"
+        >
 
-        </section>
+        <label for="pemilikToko">Nama Pemilik</label>
+        <input
+            id="pemilikToko"
+            type="text"
+            placeholder="Nama pemilik toko"
+            autocomplete="name"
+        >
+
+        <label for="lokasiToko">Lokasi Kecamatan</label>
+        <input
+            id="lokasiToko"
+            type="text"
+            placeholder="Contoh: Nganjuk"
+        >
+
+        <label>Nomor WhatsApp Toko</label>
+        <input
+            type="tel"
+            id="whatsappToko"
+            placeholder="Contoh: 6281234567890"
+        >
+
+        <label>Deskripsi Toko</label>
+        <textarea
+            id="deskripsiToko"
+            rows="4"
+            placeholder="Ceritakan tentang toko dan produk yang kamu jual..."
+        ></textarea>
+
+        <label>Foto Profil Toko</label>
+        <input
+            type="file"
+            id="fotoProfilToko"
+            accept="image/*"
+        >
+
+        <label>Banner Toko</label>
+        <input
+            type="file"
+            id="bannerToko"
+            accept="image/*"
+        >
+
+        <button type="button" onclick="simpanToko()">
+            Simpan Informasi Toko
+        </button>
+
+        <p id="pesanToko"></p>
+
+    </section>
+
+</div>
 
         <!-- TAMBAH PRODUK -->
         <section class="seller-card">

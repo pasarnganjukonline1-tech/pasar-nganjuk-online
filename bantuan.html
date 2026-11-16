@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bantuan - Pasar Nganjuk Online</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f6fc;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0878d1, #0755a5);
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .judul {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .judul h2 {
+            color: #0878d1;
+            font-size: 26px;
+        }
+
+        .judul p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .daftar-bantuan {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .item {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e8eef5;
+        }
+
+        .ikon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .item h3 {
+            color: #0878d1;
+            margin: 5px 0 12px;
+        }
+
+        .item p {
+            color: #666;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .hubungi {
+            background: #e4f2ff;
+            padding: 25px;
+            border-radius: 14px;
+            text-align: center;
+            margin-top: 25px;
+            line-height: 1.7;
+        }
+
+        .hubungi h2 {
+            color: #0755a5;
+        }
+
+        .tombol-wa {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .tombol-wa:hover {
+            background: #1da851;
+        }
+
+        .kembali {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 13px 22px;
+            background: #0878d1;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .kembali:hover {
+            background: #0755a5;
+        }
+
+        footer {
+            background: #0755a5;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 35px 15px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            main {
+                margin: 15px auto;
+                padding: 15px;
+            }
+
+            .daftar-bantuan {
+                grid-template-columns: 1fr;
+            }
+
+            .judul h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Pusat Bantuan</h1>
+    <p>Pasar Nganjuk Online</p>
+</header>
+
+<main>
+
+    <div class="judul">
+        <h2>Selamat Datang di Pusat Bantuan</h2>
+
+        <p>
+            Temukan informasi mengenai cara berbelanja,
+            menghubungi penjual, dan menggunakan layanan
+            Pasar Nganjuk Online.
+        </p>
+    </div>
+
+    <div class="daftar-bantuan">
+
+        <div class="item">
+            <div class="ikon">🛒</div>
+            <h3>Bagaimana cara membeli produk?</h3>
+
+            <p>
+                Pilih produk yang kamu inginkan,
+                masukkan ke keranjang, kemudian lanjutkan
+                ke proses pemesanan.
+            </p>
+        </div>
+
+        <div class="item">
+            <div class="ikon">📱</div>
+            <h3>Bagaimana cara menghubungi penjual?</h3>
+
+            <p>
+                Kamu dapat menghubungi penjual melalui
+                informasi WhatsApp yang tersedia
+                pada halaman toko.
+            </p>
+        </div>
+
+        <div class="item">
+            <div class="ikon">🏪</div>
+            <h3>Bagaimana cara menjadi penjual?</h3>
+
+            <p>
+                Daftarkan akun penjual, lengkapi informasi
+                toko, kemudian tunggu pemeriksaan
+                dan verifikasi dari admin.
+            </p>
+        </div>
+
+        <div class="item">
+            <div class="ikon">📦</div>
+            <h3>Bagaimana cara melihat pesanan?</h3>
+
+            <p>
+                Gunakan halaman riwayat pesanan untuk
+                memeriksa informasi dan status pesanan
+                yang sudah kamu buat.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="hubungi">
+        <h2>Masih Membutuhkan Bantuan?</h2>
+
+        <p>
+            Jika kamu mengalami kendala atau memiliki
+            pertanyaan, silakan hubungi tim kami melalui WhatsApp.
+        </p>
+
+        <a
+            href="https://wa.me/6282139546090"
+            class="tombol-wa"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Chat Admin WhatsApp
+        </a>
+    </div>
+
+    <a href="index.html" class="kembali">
+        ← Kembali ke Beranda
+    </a>
+
+</main>
+
+<footer>
+    <p>© 2026 Pasar Nganjuk Online</p>
+    <p>Belanja Lokal, Dukung UMKM Nganjuk</p>
+</footer>
+
+</body>
+</html>

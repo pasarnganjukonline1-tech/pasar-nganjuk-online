@@ -817,10 +817,11 @@ document.getElementById("checkoutForm").addEventListener(
 async function ambilProdukSupabase() {
     try {
         const { data, error } = await supabaseClient
-           .from("produk")
-.select("*")
-.eq("status", "aktif")
-.order("created_at", { ascending: false });
+    .from("produk")
+    .select("*")
+    .eq("status", "aktif")
+    .order("created_at", { ascending: false });
+
         if (error) throw error;
 
         if (data && data.length > 0) {
@@ -862,13 +863,52 @@ created_at: item.created_at
 }
 
 // ===================================
+// AMBIL TOKO AKTIF DARI SUPABASE
+// ===================================
+
+async function ambilTokoAktif() {
+    const areaToko = document.getElementById("popularStores");
+
+    if (!areaToko) return;
+
+    try {
+        const { data, error } = await supabaseClient
+            .from("toko")
+            .select("id, nama_toko, deskripsi, status")
+            .eq("status", "aktif")
+            .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        areaToko.innerHTML = "";
+
+        if (!data || data.length === 0) {
+            areaToko.textContent = "Belum ada toko aktif.";
+            return;
+        }
+
+        data.forEach(item => {
+            const kartu = document.createElement("div");
+            kartu.textContent = "🏪 " + item.nama_toko;
+            areaToko.appendChild(kartu);
+        });
+
+    } catch (error) {
+        console.error("Gagal mengambil toko:", error.message);
+        areaToko.textContent = "Gagal memuat toko.";
+    }
+}
+
+// ===================================
 // JALANKAN SAAT WEBSITE DIBUKA
 // ===================================
 
 tampilkanProduk(produk);
 perbaruiKeranjang();
 
+
 if (typeof supabaseClient !== "undefined") {
     ambilProdukSupabase();
+    ambilTokoAktif();
 }
 

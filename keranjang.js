@@ -144,48 +144,25 @@ if (formCheckout) {
             const dataPembeli = Object.fromEntries(
                 new FormData(formCheckout).entries()
             );
+         const daftarItem = keranjang.map(item => ({
+    produk_id: item.produk_id,
+    toko_id: item.toko_id,
+    jumlah: item.jumlah
+}));
 
-            const idPesanan = crypto.randomUUID();
-            const kodePesanan = "PNO-" + Date.now();
-            const totalPesanan = hitungTotalKeranjang();
+const { data: hasilPesanan, error: errorPesanan } =
+    await supabaseClient.rpc("buat_pesanan_cod", {
+        p_nama_pembeli: dataPembeli.nama,
+        p_whatsapp: dataPembeli.whatsapp,
+        p_alamat: dataPembeli.alamat,
+        p_kecamatan: dataPembeli.kecamatan,
+        p_catatan: dataPembeli.catatan || "",
+        p_items: daftarItem
+    });
 
-            const { error: errorPesanan } = await supabaseClient
-                .from("pesanan")
-                .insert({
-                    id: idPesanan,
-                    kode_pesanan: kodePesanan,
-                    nama_pembeli: dataPembeli.nama,
-                    whatsapp: dataPembeli.whatsapp,
-                    alamat: dataPembeli.alamat,
-                    kecamatan: dataPembeli.kecamatan,
-                    catatan: dataPembeli.catatan || "",
-                    metode_pembayaran: "COD",
-                    total: totalPesanan,
-                    status: "Menunggu"
-                });
+if (errorPesanan) throw errorPesanan;
 
-            if (errorPesanan) throw errorPesanan;
-
-            const daftarItem = keranjang.map(item => ({
-                pesanan_id: idPesanan,
-                produk_id: item.produk_id,
-                toko_id: item.toko_id,
-                nama_produk: item.nama,
-                harga: item.harga,
-                jumlah: item.jumlah,
-                nama_toko: item.namaToko || ""
-            }));
-
-            const { error: errorItem } = await supabaseClient
-                .from("item_pesanan")
-                .insert(daftarItem);
-
-            if (errorItem) {
-                throw new Error(
-                    "Data pesanan utama sudah tersimpan, tetapi detail produk gagal: " + errorItem.message
-                );
-            }
-
+const kodePesanan = hasilPesanan.kode_pesanan;
             pesan.textContent =
                 "Pesanan berhasil dibuat! Kode pesanan: " + kodePesanan;
 

@@ -170,13 +170,76 @@ async function muatProfilToko() {
 
         const { data, error } = await supabaseClient
             .from("toko")
-            .select("nama_toko, nama_pemilik, lokasi")
+           .select(`
+    nama_toko,
+    nama_pemilik,
+    lokasi,
+    status,
+    status_verifikasi,
+    alasan_penolakan
+`)
             .eq("user_id", userId)
             .maybeSingle();
 
         if (error) throw error;
 
         if (data) {
+            const areaPendaftaran = document.getElementById("areaPendaftaranToko");
+const areaStatus = document.getElementById("areaStatusToko");
+const isiStatus = document.getElementById("isiStatusToko");
+
+const statusVerifikasi = data.status_verifikasi || "Menunggu";
+const statusToko = data.status || "aktif";
+
+// Toko sudah terverifikasi dan aktif
+if (
+    statusVerifikasi === "Terverifikasi" &&
+    statusToko === "aktif"
+) {
+    areaPendaftaran.style.display = "none";
+    areaStatus.style.display = "block";
+
+    isiStatus.innerHTML = `
+        <h3 style="color:green;">✅ Toko Terverifikasi</h3>
+        <p>Toko kamu sudah aktif dan dapat digunakan untuk berjualan.</p>
+    `;
+}
+
+// Toko masih menunggu verifikasi
+else if (statusVerifikasi === "Menunggu") {
+    areaPendaftaran.style.display = "block";
+    areaStatus.style.display = "block";
+
+    isiStatus.innerHTML = `
+        <h3 style="color:#b7791f;">⏳ Menunggu Verifikasi</h3>
+        <p>Data toko kamu sedang diperiksa oleh admin.</p>
+    `;
+}
+
+// Toko ditolak
+else if (statusVerifikasi === "Ditolak") {
+    areaPendaftaran.style.display = "block";
+    areaStatus.style.display = "block";
+
+    isiStatus.innerHTML = `
+        <h3 style="color:#dc2626;">❌ Pendaftaran Ditolak</h3>
+        <p>Alasan: ${escapeHTMLPenjual(data.alasan_penolakan || "Tidak ada alasan yang diberikan.")}</p>
+        <p>Silakan perbaiki informasi toko, lalu simpan kembali.</p>
+    `;
+}
+
+// Toko dinonaktifkan admin
+else if (statusToko === "nonaktif") {
+    areaPendaftaran.style.display = "none";
+    areaStatus.style.display = "block";
+
+    isiStatus.innerHTML = `
+        <h3 style="color:#dc2626;">⛔ Toko Dinonaktifkan</h3>
+        <p>Toko kamu sedang dinonaktifkan oleh admin. Silakan hubungi admin.</p>
+    `;
+}
+
+            
             document.getElementById("namaToko").value =
                 data.nama_toko || "";
 
@@ -188,8 +251,12 @@ async function muatProfilToko() {
 
             pesan.textContent = "Profil toko berhasil dimuat.";
         } else {
-            pesan.textContent = "Silakan lengkapi profil toko.";
-        }
+    document.getElementById("areaPendaftaranToko").style.display = "block";
+
+    document.getElementById("areaStatusToko").style.display = "none";
+
+    pesan.textContent = "Silakan lengkapi profil toko.";
+}
 
     } catch (error) {
         console.error("Gagal memuat profil toko:", error);
@@ -298,14 +365,15 @@ async function tambahProdukPenjual() {
             await supabaseClient
                 .from("produk")
                 .insert({
-                    nama: nama,
-                    harga: harga,
-                    deskripsi: deskripsi,
-kategori: document.getElementById("kategoriProduk").value,
-lokasi: toko.lokasi,
-                    gambar_url: gambarUrl,
-                    toko_id: toko.id
-                })
+    nama: nama,
+    harga: harga,
+    deskripsi: deskripsi,
+    kategori: document.getElementById("kategoriProduk").value,
+    lokasi: toko.lokasi,
+    nama_toko: toko.nama_toko,
+    gambar_url: gambarUrl,
+    toko_id: toko.id
+})
                 .select()
                 .single();
 
@@ -365,7 +433,7 @@ function tampilkanProdukPenjual() {
     tempat.innerHTML = produkPenjual.map((item, index) => `
         <div class="seller-product">
             <img
-                src="${escapeHTMLPenjual(item.gambar)}"
+                src="${escapeHTMLPenjual(item.gambar || "")}"
                 alt="${escapeHTMLPenjual(item.nama)}"
             >
 
@@ -376,12 +444,60 @@ function tampilkanProdukPenjual() {
                     Rp${item.harga.toLocaleString("id-ID")}
                 </p>
 
+                <p>
+                    Status:
+                    <strong>
+                        ${item.status === "aktif" ? "Aktif" : "Nonaktif"}
+                    </strong>
+                </p>
+
+                <button onclick="ubahStatusProdukPenjual(${index})">
+                    ${item.status === "aktif"
+                        ? "Nonaktifkan Produk"
+                        : "Aktifkan Produk"}
+                </button>
+
                 <button onclick="hapusProdukPenjual(${index})">
                     Hapus
                 </button>
             </div>
         </div>
     `).join("");
+}
+
+// =====================================
+// MENGUBAH STATUS PRODUK PENJUAL
+// =====================================
+
+async function ubahStatusProdukPenjual(index) {
+    const item = produkPenjual[index];
+
+    if (!item) return;
+
+    const statusBaru =
+        item.status === "aktif" ? "nonaktif" : "aktif";
+
+    const yakin = confirm(
+        `Ubah status produk ${item.nama} menjadi ${statusBaru}?`
+    );
+
+    if (!yakin) return;
+
+    const { error } = await supabaseClient
+        .from("produk")
+        .update({ status: statusBaru })
+        .eq("id", item.id);
+
+    if (error) {
+        alert("Gagal mengubah status: " + error.message);
+        return;
+    }
+
+    item.status = statusBaru;
+
+    tampilkanProdukPenjual();
+
+    alert("Status produk berhasil diubah.");
 }
 
 
@@ -405,19 +521,68 @@ async function muatProdukPenjual() {
 
         const userId = sessionData.session.user.id;
 
-        const { data: toko, error: tokoError } = await supabaseClient
-            .from("toko")
-            .select("id")
-            .eq("user_id", userId)
-            .maybeSingle();
+const { data: toko, error: tokoError } = await supabaseClient
+    .from("toko")
+    .select("id, status, status_verifikasi")
+    .eq("user_id", userId)
+    .single();
 
-        if (tokoError) throw tokoError;
+if (tokoError || !toko) {
+    throw new Error(
+        "Profil toko belum ditemukan. Simpan profil toko terlebih dahulu."
+    );
+    
+}
 
-        if (!toko) {
-            produkPenjual = [];
-            tempat.innerHTML = "<p>Profil toko belum ditemukan.</p>";
-            return;
-        }
+
+if (toko.status === "nonaktif"
+) {
+    produkPenjual = 
+[];
+    tempat.innerHTML = `
+        <h3>⛔ Toko Sedang Dinonaktifkan</h3>
+        <p>Toko kamu sementara tidak dapat digunakan untuk berjualan.</p>
+        <p>Silakan hubungi admin Pasar Nganjuk Online.</p>
+    `
+;
+    return
+;
+}
+
+if (toko.status_verifikasi !== "Terverifikasi"
+) {
+    produkPenjual = 
+[];
+    tempat.innerHTML = `
+        <h3>⏳ Toko Belum Terverifikasi</h3>
+        <p>Kamu belum bisa mengelola produk sebelum toko disetujui admin.</p>
+    `
+;
+    return
+;
+}
+
+if (
+    toko.status !== "aktif" ||
+    toko.status_verifikasi !== "Terverifikasi"
+) {
+    tempat.innerHTML = `
+        <h3>Pesanan Belum Tersedia</h3>
+        <p>Toko harus terverifikasi dan aktif untuk menerima pesanan.</p>
+    `;
+    return;
+}
+
+
+if (toko.status === "nonaktif") {
+    produkPenjual = [];
+    tempat.innerHTML = `
+        <h3>Toko Sedang Dinonaktifkan</h3>
+        <p>Toko kamu sementara tidak dapat digunakan untuk berjualan.</p>
+        <p>Silakan hubungi admin Pasar Nganjuk Online.</p>
+    `;
+    return;
+}
 
         const { data, error } = await supabaseClient
             .from("produk")
@@ -440,13 +605,14 @@ async function muatProdukPenjual() {
             }
 
             return {
-                id: item.id,
-                nama: item.nama,
-                harga: Number(item.harga),
-                deskripsi: item.deskripsi || "",
-                gambar: item.gambar_url,
-                pathFoto: pathFoto
-            };
+    id: item.id,
+    nama: item.nama,
+    harga: Number(item.harga),
+    deskripsi: item.deskripsi || "",
+    gambar: item.gambar_url,
+    pathFoto: pathFoto,
+    status: item.status || "aktif"
+};
         });
 
         tampilkanProdukPenjual();
@@ -541,6 +707,16 @@ async function muatPesananPenjual() {
             tempat.innerHTML = "<p>Profil toko belum ditemukan.</p>";
             return;
         }
+        if (
+    toko.status !== "aktif" ||
+    toko.status_verifikasi !== "Terverifikasi"
+) {
+    tempat.innerHTML = `
+        <h3>Pesanan Belum Tersedia</h3>
+        <p>Toko harus terverifikasi dan aktif untuk menerima pesanan.</p>
+    `;
+    return;
+}
 
         const { data: daftarItem, error: itemError } =
             await supabaseClient
