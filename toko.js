@@ -17,49 +17,6 @@ async function muatDetailToko() {
     const profil = document.getElementById("profilToko");
     const daftarProduk = document.getElementById("daftarProdukToko");
 
-    if (!tokoId) {
-     profil.innerHTML = `
-    <div class="banner-toko">
-        ${
-            toko.banner_toko_url
-            ? `<img src="${escapeHTMLToko(toko.banner_toko_url)}" alt="Banner toko">`
-            : `<div class="banner-kosong">Selamat Datang di Toko Kami</div>`
-        }
-    </div>
-
-    <div class="kartu-profil-toko">
-        <div class="identitas-toko">
-            ${
-                toko.foto_toko_url
-                ? `<img class="foto-profil-toko" src="${escapeHTMLToko(toko.foto_toko_url)}" alt="Foto toko">`
-                : `<div class="foto-profil-kosong">🏪</div>`
-            }
-
-            <div class="info-identitas-toko">
-                <h1>${escapeHTMLToko(toko.nama_toko)}</h1>
-                <p>👤 Pemilik: ${escapeHTMLToko(toko.nama_pemilik || "-")}</p>
-                <p>📍 Lokasi: ${escapeHTMLToko(toko.lokasi || "-")}</p>
-
-                <p class="deskripsi-toko">
-                    ${escapeHTMLToko(toko.deskripsi || "Belum ada deskripsi toko.")}
-                </p>
-
-                ${
-                    toko.whatsapp
-                    ? `<a class="tombol-whatsapp"
-                        href="https://wa.me/${toko.whatsapp.replace(/\D/g, "")}"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        💬 Chat Penjual via WhatsApp
-                    </a>`
-                    : ""
-                }
-            </div>
-        </div>
-    </div>
-`; 
-    }
-
     try {
         // AMBIL PROFIL TOKO
        const { data: toko, error: tokoError } = await supabaseClient
@@ -72,12 +29,17 @@ async function muatDetailToko() {
         if (tokoError) throw tokoError;
 
         
+
 profil.innerHTML = `
     <div class="banner-toko">
         ${
             toko.banner_toko_url
             ? `<img src="${escapeHTMLToko(toko.banner_toko_url)}" alt="Banner toko">`
-            : `<div class="banner-kosong">Selamat Datang di Toko Kami</div>`
+            : `<div class="banner-kosong">
+                <span>🏪</span>
+                <h2>Selamat Datang di Toko Kami</h2>
+                <p>Temukan produk pilihan dari toko ini</p>
+            </div>`
         }
     </div>
 
@@ -87,16 +49,24 @@ profil.innerHTML = `
                 toko.foto_toko_url
                 ? `<img class="foto-profil-toko"
                     src="${escapeHTMLToko(toko.foto_toko_url)}"
-                    alt="Foto toko">`
+                    alt="Foto ${escapeHTMLToko(toko.nama_toko)}">`
                 : `<div class="foto-profil-kosong">🏪</div>`
             }
 
             <div class="info-identitas-toko">
+                <span class="label-toko">TOKO LOKAL NGANJUK</span>
+
                 <h1>${escapeHTMLToko(toko.nama_toko)}</h1>
 
-                <p>👤 Pemilik: ${escapeHTMLToko(toko.nama_pemilik || "-")}</p>
+                <p class="pemilik-toko">
+                    <span>👤</span>
+                    Pemilik: ${escapeHTMLToko(toko.nama_pemilik || "-")}
+                </p>
 
-                <p>📍 Lokasi: ${escapeHTMLToko(toko.lokasi || "-")}</p>
+                <p class="lokasi-toko">
+                    <span>📍</span>
+                    ${escapeHTMLToko(toko.lokasi || "-")}
+                </p>
 
                 <p class="deskripsi-toko">
                     ${escapeHTMLToko(toko.deskripsi || "Belum ada deskripsi toko.")}
@@ -116,6 +86,7 @@ profil.innerHTML = `
         </div>
     </div>
 `;
+
 
 
         // AMBIL PRODUK TOKO

@@ -2060,3 +2060,599 @@ body:has(.seller-dashboard) {
 #deskripsiProduk::placeholder {
     color: #9aa9b8;
 }
+
+
+/* =================================
+   TAMPILAN PROFIL DETAIL TOKO
+================================= */
+
+.banner-toko {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0878d1, #0755a5);
+    position: relative;
+}
+
+.banner-toko img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.banner-kosong {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.banner-kosong span {
+    font-size: 45px;
+    margin-bottom: 8px;
+}
+
+.banner-kosong h2 {
+    margin: 5px 0;
+}
+
+.banner-kosong p {
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+.kartu-profil-toko {
+    background: white;
+    padding: 25px;
+    margin: -35px 20px 30px;
+    position: relative;
+    border-radius: 16px;
+    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.09);
+}
+
+.identitas-toko {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+}
+
+.foto-profil-toko,
+.foto-profil-kosong {
+    width: 125px;
+    height: 125px;
+    min-width: 125px;
+    border-radius: 16px;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.foto-profil-kosong {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eaf4ff;
+    font-size: 50px;
+}
+
+.info-identitas-toko {
+    flex: 1;
+    min-width: 0;
+}
+
+.label-toko {
+    display: inline-block;
+    color: #0878d1;
+    background: #eaf4ff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.info-identitas-toko h1 {
+    color: #17324d;
+    font-size: 27px;
+    margin: 10px 0;
+}
+
+.pemilik-toko,
+.lokasi-toko {
+    color: #555;
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.deskripsi-toko {
+    color: #555;
+    line-height: 1.7;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.tombol-whatsapp {
+    display: inline-block;
+    background: #16a34a;
+    color: white;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 9px;
+    font-weight: bold;
+    margin-top: 5px;
+    transition: 0.2s;
+}
+
+.tombol-whatsapp:hover {
+    background: #12813c;
+    transform: translateY(-2px);
+}
+
+/* RESPONSIVE PROFIL TOKO */
+
+@media (max-width: 600px) {
+    .banner-toko {
+        height: 170px;
+        border-radius: 12px;
+    }
+
+    .kartu-profil-toko {
+        margin: -25px 10px 25px;
+        padding: 18px;
+    }
+
+    .identitas-toko {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .foto-profil-toko,
+    .foto-profil-kosong {
+        width: 105px;
+        height: 105px;
+        min-width: 105px;
+    }
+
+    .info-identitas-toko h1 {
+        font-size: 22px;
+    }
+}
+
+/* =================================
+   DAFTAR PRODUK DETAIL TOKO
+================================= */
+
+.produk-toko {
+    margin-top: 30px;
+}
+
+.produk-toko > h2 {
+    color: #17324d;
+    font-size: 23px;
+    margin-bottom: 18px;
+}
+
+#daftarProdukToko {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.kartu-produk-toko {
+    background: white;
+    border: 1px solid #e8edf3;
+    border-radius: 13px;
+    overflow: hidden;
+    padding: 12px;
+    transition: 0.2s;
+}
+
+.kartu-produk-toko:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
+}
+
+.kartu-produk-toko img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 9px;
+    background: #f1f5f9;
+}
+
+.kartu-produk-toko h3 {
+    color: #243b53;
+    font-size: 16px;
+    margin: 12px 0 7px;
+}
+
+.kategori-produk-toko {
+    display: inline-block;
+    background: #eaf4ff;
+    color: #0878d1;
+    font-size: 11px;
+    padding: 5px 9px;
+    border-radius: 20px;
+    margin: 0 0 8px;
+}
+
+.harga-produk-toko {
+    color: #0878d1;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.kartu-produk-toko > p:not(.kategori-produk-toko):not(.harga-produk-toko) {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 38px;
+}
+
+.tombol-detail-toko,
+.tombol-keranjang-toko {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 7px;
+    transition: 0.2s;
+}
+
+.tombol-detail-toko {
+    background: #eaf4ff;
+    color: #0878d1;
+}
+
+.tombol-detail-toko:hover {
+    background: #d6eaff;
+}
+
+.tombol-keranjang-toko {
+    background: #0878d1;
+    color: white;
+}
+
+.tombol-keranjang-toko:hover {
+    background: #0755a5;
+}
+
+@media (max-width: 600px) {
+    #daftarProdukToko {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .kartu-produk-toko {
+        padding: 9px;
+    }
+
+    .kartu-produk-toko img {
+        height: 135px;
+    }
+
+    .kartu-produk-toko h3 {
+        font-size: 14px;
+    }
+
+    .harga-produk-toko {
+        font-size: 16px;
+    }
+}
+
+/* =================================
+   PENCARIAN DAN FILTER PRODUK TOKO
+================================= */
+
+#cariProdukToko,
+#filterKategoriToko,
+#urutkanProdukToko {
+    height: 45px;
+    padding: 0 13px;
+    border: 1px solid #dce4ed;
+    border-radius: 9px;
+    background: white;
+    color: #334155;
+    font-size: 14px;
+    outline: none;
+    margin: 5px 5px 10px 0;
+}
+
+#cariProdukToko {
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+}
+
+#cariProdukToko:focus,
+#filterKategoriToko:focus,
+#urutkanProdukToko:focus {
+    border-color: #0878d1;
+    box-shadow: 0 0 0 3px rgba(8, 120, 209, 0.10);
+}
+
+#filterKategoriToko,
+#urutkanProdukToko {
+    width: calc(50% - 8px);
+}
+
+@media (max-width: 600px) {
+    #filterKategoriToko,
+    #urutkanProdukToko {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+
+/* =================================
+   HEADER HALAMAN DETAIL TOKO
+================================= */
+
+.header-toko {
+    background: linear-gradient(120deg, #0878d1, #0755a5);
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.header-toko h2 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.navigasi-toko {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.navigasi-toko a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 9px;
+    transition: 0.2s;
+}
+
+.navigasi-toko a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#tombolBukaKeranjangToko {
+    background: white;
+    color: #0755a5;
+    border: none;
+    border-radius: 9px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+#tombolBukaKeranjangToko:hover {
+    background: #eaf4ff;
+    transform: translateY(-2px);
+}
+
+#jumlahKeranjangToko {
+    background: #ef4444;
+    color: white;
+    min-width: 21px;
+    height: 21px;
+    padding: 0 5px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+}
+
+@media (max-width: 600px) {
+    .header-toko {
+        padding: 13px 12px;
+        flex-wrap: wrap;
+    }
+
+    .header-toko h2 {
+        font-size: 17px;
+    }
+
+    .navigasi-toko {
+        gap: 7px;
+    }
+
+    .navigasi-toko a,
+    #tombolBukaKeranjangToko {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+}
+
+.header-toko h2 {
+    color: #ffffff !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* =================================
+   LOGO PASAR NGANJUK ONLINE
+================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0878d1, #0755a5);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(7, 85, 165, 0.25);
+}
+
+.logo-icon svg {
+    width: 43px;
+    height: 43px;
+}
+
+.logo-text h1 {
+    margin: 0;
+    color: #17324d;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.logo-text h1 span {
+    color: #0878d1;
+}
+
+.logo-text small {
+    display: block;
+    color: #64748b;
+    font-size: 11px;
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+}
+
+@media (max-width: 600px) {
+    .logo {
+        gap: 8px;
+    }
+
+    .logo-icon {
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+        border-radius: 11px;
+    }
+
+    .logo-icon svg {
+        width: 34px;
+        height: 34px;
+    }
+
+    .logo-text h1 {
+        font-size: 16px;
+    }
+
+    .logo-text small {
+        font-size: 9px;
+    }
+}
+
+
+/* =================================
+   BANNER UTAMA PASAR NGANJUK ONLINE
+================================= */
+
+.hero {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    padding: 0;
+    margin: 10px 0 15px;
+    background: none;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 14px;
+}
+
+@media (max-width: 600px) {
+    .hero {
+        margin: 8px 0 12px;
+        border-radius: 9px;
+    }
+
+    .hero img {
+        border-radius: 9px;
+    }
+}
+
+
+
+/* LOGO HEADER - menggunakan gambar identitas resmi */
+.main-header .logo {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    width: min(380px, 31vw);
+    max-width: 380px;
+    min-width: 220px;
+    gap: 0;
+}
+
+.main-header .logo-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 86px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+@media (max-width: 900px) {
+    .main-header .logo {
+        width: 300px;
+        min-width: 190px;
+    }
+    .main-header .logo-image {
+        max-height: 70px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-header .logo {
+        width: 220px;
+        min-width: 0;
+        max-width: 58vw;
+    }
+    .main-header .logo-image {
+        max-height: 54px;
+    }
+}
