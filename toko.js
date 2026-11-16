@@ -123,8 +123,9 @@ profil.innerHTML = `
     .from("produk")
     .select("*")
     .eq("toko_id", tokoId)
-    .eq("status", "aktif")
-    .order("created_at", { ascending: false });
+.eq("status", "aktif")
+.eq("status_admin", "aktif")
+.order("created_at", { ascending: false });
 
 if (produkError) throw produkError;
 

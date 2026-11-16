@@ -818,9 +818,10 @@ async function ambilProdukSupabase() {
     try {
         const { data, error } = await supabaseClient
     .from("produk")
-    .select("*")
-    .eq("status", "aktif")
-    .order("created_at", { ascending: false });
+.select("*")
+.eq("status", "aktif")
+.eq("status_admin", "aktif")
+.order("created_at", { ascending: false });
 
         if (error) throw error;
 

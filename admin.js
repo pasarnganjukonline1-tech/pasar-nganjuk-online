@@ -431,20 +431,20 @@ foto.style.border = "1px solid #e2e8f0";
         const toko = document.createElement("p");
         toko.textContent = "ID Toko: " + (item.toko_id || "-");
 
-        const status = document.createElement("p");
+       const status = document.createElement("p");
 
-status.textContent = item.status === "nonaktif"
-    ? "Status: Nonaktif"
-    : "Status: Aktif";
+status.textContent = item.status_admin === "nonaktif"
+    ? "Status Admin: Nonaktif"
+    : "Status Admin: Aktif";
 
-status.style.color = item.status === "nonaktif"
+status.style.color = item.status_admin === "nonaktif"
     ? "#dc2626"
     : "#16a34a";
 
 status.style.fontWeight = "bold";
 
-        const tombol = document.createElement("button");
-        const sedangAktif = item.status !== "nonaktif";
+const tombol = document.createElement("button");
+const sedangAktif = item.status_admin !== "nonaktif";
 
         tombol.textContent = sedangAktif
             ? "Nonaktifkan Produk"
@@ -461,7 +461,7 @@ status.style.fontWeight = "bold";
 
             const { error } = await supabase
                 .from("produk")
-                .update({ status: statusBaru })
+                .update({ status_admin: statusBaru })
                 .eq("id", item.id);
 
             if (error) {
@@ -483,31 +483,34 @@ status.style.fontWeight = "bold";
 
     // Fungsi pencarian produk
     
-// Fungsi pencarian dan filter produk
-const inputCariProduk = document.getElementById("cariProduk");
-const filterStatusProduk = document.getElementById("filterStatusProduk");
 
-function terapkanFilterProduk() {
-    const kataKunci = inputCariProduk.value.toLowerCase().trim();
-    const statusDipilih = filterStatusProduk.value;
+    // Fungsi pencarian dan filter produk
+    const inputCariProduk = document.getElementById("cariProduk");
+    const filterStatusProduk = document.getElementById("filterStatusProduk");
 
-    daftar.querySelectorAll(":scope > div").forEach(kartu => {
-        const cocokNama = kartu.textContent
-            .toLowerCase()
-            .includes(kataKunci);
+    function terapkanFilterProduk() {
+        const kataKunci = inputCariProduk.value.toLowerCase().trim();
+        const statusDipilih = filterStatusProduk.value;
 
-        const cocokStatus =
-            statusDipilih === "semua" ||
-            (statusDipilih === "nonaktif"
-                ? kartu.textContent.includes("Status: Nonaktif")
-                : kartu.textContent.includes("Status: Aktif"));
+        daftar.querySelectorAll(":scope > div").forEach(kartu => {
+            const teksKartu = kartu.textContent.toLowerCase();
 
-        kartu.style.display = cocokNama && cocokStatus ? "" : "none";
-    });
-}
+            const cocokNama = teksKartu.includes(kataKunci);
 
-inputCariProduk.addEventListener("input", terapkanFilterProduk);
-filterStatusProduk.addEventListener("change", terapkanFilterProduk);
+            const cocokStatus =
+                statusDipilih === "semua" ||
+                (statusDipilih === "nonaktif"
+                    ? teksKartu.includes("status admin: nonaktif")
+                    : teksKartu.includes("status admin: aktif"));
+
+            kartu.style.display =
+                cocokNama && cocokStatus ? "" : "none";
+        });
+    }
+
+    inputCariProduk.addEventListener("input", terapkanFilterProduk);
+    filterStatusProduk.addEventListener("change", terapkanFilterProduk);
+
 
 
     inputCariProduk.addEventListener("input", () => {

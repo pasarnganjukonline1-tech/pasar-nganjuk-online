@@ -422,6 +422,7 @@ async function tambahProdukPenjual() {
 // 6. MENAMPILKAN PRODUK PENJUAL
 // =====================================
 
+
 function tampilkanProdukPenjual() {
     const tempat = document.getElementById("daftarProdukPenjual");
 
@@ -430,40 +431,51 @@ function tampilkanProdukPenjual() {
         return;
     }
 
-    tempat.innerHTML = produkPenjual.map((item, index) => `
-        <div class="seller-product">
-            <img
-                src="${escapeHTMLPenjual(item.gambar || "")}"
-                alt="${escapeHTMLPenjual(item.nama)}"
-            >
+    tempat.innerHTML = produkPenjual.map((item, index) => {
+        const diblokirAdmin = item.status_admin === "nonaktif";
 
-            <div>
-                <strong>${escapeHTMLPenjual(item.nama)}</strong>
+        return `
+            <div class="seller-product">
+                <img
+                    src="${escapeHTMLPenjual(item.gambar || "")}"
+                    alt="${escapeHTMLPenjual(item.nama)}"
+                >
 
-                <p>
-                    Rp${item.harga.toLocaleString("id-ID")}
-                </p>
+                <div>
+                    <strong>${escapeHTMLPenjual(item.nama)}</strong>
 
-                <p>
-                    Status:
-                    <strong>
-                        ${item.status === "aktif" ? "Aktif" : "Nonaktif"}
-                    </strong>
-                </p>
+                    <p>
+                        Rp${item.harga.toLocaleString("id-ID")}
+                    </p>
 
-                <button onclick="ubahStatusProdukPenjual(${index})">
-                    ${item.status === "aktif"
-                        ? "Nonaktifkan Produk"
-                        : "Aktifkan Produk"}
-                </button>
+                    <p>
+                        Status Penjual:
+                        <strong>
+                            ${item.status === "aktif" ? "Aktif" : "Nonaktif"}
+                        </strong>
+                    </p>
 
-                <button onclick="hapusProdukPenjual(${index})">
-                    Hapus
-                </button>
+                    ${diblokirAdmin ? `
+                        <p style="color:#dc2626; font-weight:bold;">
+                            ⛔ Produk dinonaktifkan oleh Admin
+                        </p>
+                    ` : `
+                        <button onclick="ubahStatusProdukPenjual(${index})">
+                            ${item.status === "aktif"
+                                ? "Nonaktifkan Produk"
+                                : "Aktifkan Produk"}
+                        </button>
+                    `}
+
+                    <button onclick="hapusProdukPenjual(${index})">
+                        Hapus
+                    </button>
+                </div>
             </div>
-        </div>
-    `).join("");
+        `;
+    }).join("");
 }
+
 
 // =====================================
 // MENGUBAH STATUS PRODUK PENJUAL
@@ -604,14 +616,15 @@ if (toko.status === "nonaktif") {
                 );
             }
 
-            return {
+           return {
     id: item.id,
     nama: item.nama,
     harga: Number(item.harga),
     deskripsi: item.deskripsi || "",
     gambar: item.gambar_url,
     pathFoto: pathFoto,
-    status: item.status || "aktif"
+    status: item.status || "aktif",
+    status_admin: item.status_admin || "aktif"
 };
         });
 
