@@ -244,54 +244,55 @@ body {
     background: #2397ee;
 }
 
-/* =========================================
-   HERO / BANNER UTAMA
-========================================= */
+
+/* HERO / BANNER UTAMA - SLIDER */
 .hero {
-    min-height: 275px;
-    margin: 12px 1%;
-    border-radius: 15px;
-    background: linear-gradient(90deg, #07559a, #168de1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
+    position: relative;
+    display: block;
+    width: 90%;
+    max-width: 1100px;
+    aspect-ratio: 16 / 3;
+    margin: 12px auto;
+    padding: 0;
     overflow: hidden;
+    border-radius: 15px;
+    background: #07559a;
 }
 
-.hero-content {
-    padding: 35px 20px;
+.hero-slider {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.hero h2 {
-    margin-bottom: 15px;
-    font-size: clamp(28px, 4vw, 48px);
-    font-style: italic;
+.hero-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
 }
 
-.hero h3 {
-    margin-bottom: 15px;
-    color: #ffdf45;
-    font-size: clamp(22px, 3vw, 36px);
+.hero-slide.active {
+    display: block;
 }
 
-.hero p {
-    margin-bottom: 22px;
-    font-size: 18px;
-    font-weight: bold;
+.hero-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
-.hero button {
-    padding: 13px 25px;
-    border: none;
-    border-radius: 25px;
-    background: #ffda36;
-    color: #064783;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+@media (max-width: 600px) {
+    .hero {
+        width: 98%;
+        aspect-ratio: 16 / 9;
+        margin: 8px auto;
+        border-radius: 8px;
+    }
 }
+
 
 /* =========================================
    KATEGORI
@@ -321,13 +322,83 @@ body {
     gap: 12px;
 }
 
-.categories div {
-    padding: 16px 5px;
-    border-radius: 12px;
-    background: #f1f8ff;
-    text-align: center;
-    font-size: 32px;
+
+/* KATEGORI PILIHAN */
+.categories {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 12px;
 }
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: transform .2s ease, background .2s ease;
+}
+
+.category-item:hover {
+    background: #f1f8ff;
+    transform: translateY(-4px);
+}
+
+.category-icon {
+    width: 76px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.category-icon svg {
+    width: 48px;
+    height: 48px;
+}
+
+.icon-makanan { background: #fff0df; }
+.icon-fashion { background: #e5efff; }
+.icon-elektronik { background: #e2f4ff; }
+.icon-rumah { background: #fff3d9; }
+.icon-kecantikan { background: #fce5f2; }
+.icon-pertanian { background: #e8f6df; }
+.icon-otomotif { background: #ffe8e3; }
+.icon-lainnya { background: #fff0d8; }
+
+.category-item p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+@media (max-width: 600px) {
+    .categories {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .category-icon {
+        width: 62px;
+        height: 62px;
+    }
+
+    .category-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .category-item p {
+        font-size: 11px;
+    }
+}
+
 
 .categories p {
     margin-top: 10px;
@@ -1645,24 +1716,44 @@ body:has(.seller-dashboard) {
         display: none;
     }
 
-    /* HEADER */
-    .main-header {
-        padding: 12px;
-        gap: 12px;
-    }
+ 
+/* HEADER HP */
+.main-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    gap: 10px;
+}
 
-    .logo {
-        width: 100%;
-        justify-content: center;
-    }
+/* LOGO DI KIRI */
+.main-header .pasar-logo {
+    order: 1;
+    flex: 1 1 0;
+    width: auto;
+    max-width: 230px;
+    min-width: 0;
+}
 
-    .logo h1 {
-        font-size: 21px;
-    }
+/* KERANJANG DAN AKUN DI KANAN */
+.main-header .header-actions {
+    order: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex: 0 0 auto;
+    margin-left: auto;
+}
 
-    .logo small {
-        text-align: left;
-    }
+/* PENCARIAN DI BARIS BAWAH */
+.main-header .search-urutan-wrapper {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+}
+
 
     
 
@@ -2071,90 +2162,258 @@ body:has(.seller-dashboard) {
 
 
 /* =================================
-   MENU AKUN BARU PASAR NGANJUK
+   MENU AKUN MODERN
 ================================= */
 
 .account-menu {
     position: relative;
     display: inline-block;
-    flex: 0 0 auto;
 }
 
-.account-menu > .account-icon {
+/* DROPDOWN */
+.account-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 300px;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #e8edf3;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0, 40, 80, 0.15);
+    z-index: 99999;
+}
+
+/* HEADER BIRU */
+.account-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0878d1, #0759a5);
+    color: white;
+}
+
+.account-header-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 44px;
     height: 44px;
-    padding: 0;
-    border: 1px solid #dce8f3;
+    flex-shrink: 0;
     border-radius: 50%;
-    background: #f3f8fd;
+    background: white;
     color: #0759a5;
-    cursor: pointer;
-    transition: 0.2s ease;
 }
 
-.account-menu > .account-icon:hover {
-    background: #0759a5;
-    color: #fff;
+.account-header-text strong,
+.account-header-text small {
+    display: block;
 }
 
-.account-dropdown {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    min-width: 245px;
+.account-header-text strong {
+    font-size: 15px;
+    color: white;
+}
+
+.account-header-text small {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #dceeff;
+}
+
+/* ITEM MENU */
+.account-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 10px;
+    margin: 3px 0;
+    border-radius: 11px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.account-menu-item:hover {
+    background: #f0f6fd;
+}
+
+/* IKON MENU */
+.account-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: #eaf3fc;
+    color: #0759a5;
+}
+
+.account-item-icon svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* TEKS MENU */
+.account-item-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.account-item-text strong {
+    color: #263b50;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.account-item-text small {
+    color: #8795a4;
+    font-size: 11px;
+}
+
+.account-chevron {
+    color: #9aa8b7;
+    font-size: 24px;
+}
+
+/* GARIS PEMISAH */
+.account-divider {
+    height: 1px;
+    margin: 10px 2px;
+    background: #edf0f4;
+}
+
+/* TOMBOL KELUAR */
+.account-dropdown .logout-button {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
     padding: 12px;
-    background: #fff;
-    border: 1px solid #e5eaf0;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    z-index: 99999;
+    border: none;
+    border-radius: 10px;
+    background: #fff2f2;
+    color: #d63b3b;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
 
-.account-dropdown[hidden] {
+.account-dropdown .logout-button:hover {
+    background: #ffe3e3;
+}
+
+.logout-button svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* PASTIKAN ELEMEN TERSEMBUNYI */
+.account-dropdown[hidden],
+.account-dropdown [hidden] {
     display: none !important;
 }
 
-.account-dropdown strong {
-    display: block;
-    padding: 8px 10px;
-    color: #0759a5;
-    font-size: 13px;
-}
 
-.account-dropdown a {
-    display: block;
-    padding: 11px 10px;
-    color: #333;
-    font-size: 14px;
-    text-decoration: none;
-    border-radius: 7px;
-}
-
-.account-dropdown a:hover {
-    background: #eef6ff;
-    color: #0759a5;
-}
-
-.account-dropdown hr {
-    border: 0;
-    border-top: 1px solid #e5eaf0;
-    margin: 8px 0;
-}
-
+/* MENU AKUN KHUSUS HP */
 @media (max-width: 600px) {
-    .account-menu > .account-icon {
-        width: 40px;
-        height: 40px;
+    .account-dropdown {
+        width: 255px;
+        max-width: calc(100vw - 24px);
+        padding: 9px;
+        border-radius: 13px;
     }
 
-    .account-dropdown {
-        min-width: 230px;
-        max-width: calc(100vw - 24px);
+    .account-header {
+        padding: 10px 12px;
+        margin-bottom: 6px;
+        gap: 9px;
+        border-radius: 10px;
+    }
+
+    .account-header-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .account-header-icon svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .account-header-text strong {
+        font-size: 13px;
+    }
+
+    .account-header-text small {
+        font-size: 10px;
+        margin-top: 2px;
+    }
+
+    .account-menu-item {
+        gap: 9px;
+        padding: 9px 7px;
+        margin: 2px 0;
+    }
+
+    .account-item-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+    }
+
+    .account-item-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .account-item-text strong {
+        font-size: 12px;
+    }
+
+    .account-item-text small {
+        font-size: 10px;
+    }
+
+    .account-chevron {
+        font-size: 20px;
+    }
+
+    .account-divider {
+        margin: 7px 2px;
+    }
+
+    .account-dropdown .logout-button {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    .logout-button svg {
+        width: 18px;
+        height: 18px;
     }
 }
+
+
+
 
 /* =================================
    RESPONSIVE KATEGORI
@@ -2748,45 +3007,6 @@ body:has(.seller-dashboard) {
     }
 }
 
-
-
-/* =================================
-   BANNER UTAMA PASAR NGANJUK ONLINE
-================================= */
-
-.hero {
-    width: 100%;
-    min-height: 0;
-    height: auto;
-    padding: 0;
-    margin: 10px 0 15px;
-    background: none;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-}
-
-.hero img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 14px;
-}
-
-@media (max-width: 600px) {
-    .hero {
-        margin: 8px 0 12px;
-        border-radius: 9px;
-    }
-
-    .hero img {
-        border-radius: 9px;
-    }
-}
-
-
-
 /* LOGO PASAR NGANJUK ONLINE */
 .main-header .logo {
     display: flex;
@@ -3027,6 +3247,19 @@ body:has(.seller-dashboard) {
     height: 23px;
 }
 
+/* UKURAN KHUSUS IKON AKUN */
+.account-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    justify-content: center;
+}
+
+.action-link.account-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
 /* Jumlah produk */
 .cart-count {
     position: absolute;
@@ -3168,4 +3401,197 @@ body:has(.seller-dashboard) {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* SLIDER BANNER UTAMA */
+.hero {
+    position: relative;
+    width: 90%;
+    max-width: 1100px;
+    aspect-ratio: 16 / 3;
+    margin: 12px auto;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.hero-slider {
+    position: absolute;
+    inset: 0;
+}
+
+.hero-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slide.active {
+    display: block;
+}
+
+.hero-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* TOMBOL PANAH */
+.hero-prev,
+.hero-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.hero-prev { left: 12px; }
+.hero-next { right: 12px; }
+
+/* TITIK INDIKATOR */
+.hero-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.hero-dots button {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    cursor: pointer;
+}
+
+.hero-dots button.active {
+    background: white;
+    transform: scale(1.3);
+}
+
+/* TAMPILAN HP */
+@media (max-width: 600px) {
+    .hero {
+        width: 98%;
+        aspect-ratio: 16 / 9;
+        margin: 8px auto;
+        border-radius: 6px;
+    }
+
+    /* Bagian lainnya tetap */
+
+
+    .hero-prev,
+    .hero-next {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .hero-prev { left: 6px; }
+    .hero-next { right: 6px; }
+
+    .hero-dots {
+        bottom: 7px;
+    }
+}
+
+
+/* TOMBOL LOGOUT */
+.logout-button {
+    display: block;
+    width: 100%;
+    padding: 11px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #fff0f0;
+    color: #d32f2f;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: #ffe0e0;
+}
+
+
+
+
+/* IKON NAVIGASI BAWAH HP */
+.mobile-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+}
+
+.mobile-nav a svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: #526579;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: 0.2s ease;
+}
+
+.mobile-nav a span {
+    font-size: 10px;
+    line-height: 1.2;
+    color: #526579;
+}
+
+.mobile-nav a.active svg {
+    stroke: #0759a5;
+}
+
+.mobile-nav a.active span {
+    color: #0759a5;
+    font-weight: 700;
+}
+
+.mobile-nav a:hover svg {
+    stroke: #0878d1;
+}
+
+
+/* PERKECIL TOMBOL AKUN DI HEADER */
+@media (max-width: 600px) {
+    .main-header .account-menu button.account-icon,
+    .account-menu button.action-link.account-icon {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .account-menu button.account-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
 }

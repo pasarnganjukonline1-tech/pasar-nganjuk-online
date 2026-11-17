@@ -948,3 +948,57 @@ if (typeof supabaseClient !== "undefined") {
     ambilProdukSupabase();
     ambilTokoAktif();
 }
+
+
+// SLIDER BANNER UTAMA
+document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".hero-slide");
+    const dots = document.querySelectorAll(".hero-dots button");
+    const tombolPrev = document.querySelector(".hero-prev");
+    const tombolNext = document.querySelector(".hero-next");
+
+    if (!slides.length || !dots.length || !tombolPrev || !tombolNext) {
+        return;
+    }
+
+    let slideAktif = 0;
+    let timerSlider;
+
+    function tampilkanSlide(index) {
+        slides[slideAktif].classList.remove("active");
+        dots[slideAktif].classList.remove("active");
+
+        slideAktif = (index + slides.length) % slides.length;
+
+        slides[slideAktif].classList.add("active");
+        dots[slideAktif].classList.add("active");
+    }
+
+    function slideBerikutnya() {
+        tampilkanSlide(slideAktif + 1);
+    }
+
+    function mulaiSlider() {
+        clearInterval(timerSlider);
+        timerSlider = setInterval(slideBerikutnya, 5000);
+    }
+
+    tombolNext.addEventListener("click", function () {
+        slideBerikutnya();
+        mulaiSlider();
+    });
+
+    tombolPrev.addEventListener("click", function () {
+        tampilkanSlide(slideAktif - 1);
+        mulaiSlider();
+    });
+
+    dots.forEach(function (dot, index) {
+        dot.addEventListener("click", function () {
+            tampilkanSlide(index);
+            mulaiSlider();
+        });
+    });
+
+    mulaiSlider();
+});

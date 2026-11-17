@@ -198,8 +198,11 @@
     <span id="cart-count" class="cart-count">0</span>
 </a>
 
+
 <!-- MENU AKUN -->
 <div class="account-menu">
+
+    <!-- TOMBOL IKON AKUN -->
     <button type="button"
         class="action-link account-icon"
         aria-label="Menu akun"
@@ -209,31 +212,123 @@
             menu.hidden = !menu.hidden;
             this.setAttribute('aria-expanded', !menu.hidden);
         ">
+
         <svg xmlns="http://www.w3.org/2000/svg"
-             width="24" height="24"
+             width="24"
+             height="24"
              viewBox="0 0 24 24"
              fill="none"
              stroke="currentColor"
              stroke-width="2"
              stroke-linecap="round"
              stroke-linejoin="round">
+
             <circle cx="12" cy="8" r="4"/>
             <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
+
         </svg>
     </button>
 
-    <div id="menuAkun" class="account-dropdown" hidden>
-    <strong>Akun Pengguna</strong>
-    <a href="login-pengguna.html">👤 Masuk / Daftar Pengguna</a>
 
-    <hr>
+<!-- MENU DROPDOWN AKUN -->
+<div id="menuAkun" class="account-dropdown" hidden>
 
-    <strong>Area Penjual</strong>
-    <a href="penjual.html">🏪 Dashboard Penjual</a>
-    <a href="penjual.html">➕ Daftarkan Toko</a>
+    <!-- HEADER MENU -->
+    <div class="account-header">
+        <div class="account-header-icon">
+            <svg viewBox="0 0 24 24" width="23" height="23"
+                 fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
+            </svg>
+        </div>
+
+        <div class="account-header-text">
+            <strong>Menu Akun</strong>
+            <small>Pasar Nganjuk Online</small>
+        </div>
+    </div>
+
+    <!-- JIKA BELUM LOGIN -->
+    <div id="menuSaatBelumLogin">
+
+        <a href="login-pengguna.html" class="account-menu-item">
+            <span class="account-item-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
+                </svg>
+            </span>
+
+            <span class="account-item-text">
+                <strong>Masuk / Daftar Pengguna</strong>
+                <small>Masuk untuk mulai berbelanja</small>
+            </span>
+
+            <span class="account-chevron">›</span>
+        </a>
+
+    </div>
+
+    <!-- JIKA SUDAH LOGIN -->
+    <div id="menuSaatLogin" hidden>
+
+        <a href="penjual.html" class="account-menu-item">
+            <span class="account-item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 10h18"/>
+                    <path d="M5 10V21H19V10"/>
+                    <path d="M3 10L5 3H19L21 10"/>
+                    <path d="M9 21V14H15V21"/>
+                </svg>
+            </span>
+
+            <span class="account-item-text">
+                <strong>Dashboard Penjual</strong>
+                <small>Kelola toko dan produk</small>
+            </span>
+
+            <span class="account-chevron">›</span>
+        </a>
+
+        <a href="penjual.html" class="account-menu-item">
+            <span class="account-item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 10h18"/>
+                    <path d="M5 10V21H19V10"/>
+                    <path d="M3 10L5 3H19L21 10"/>
+                    <path d="M12 13v5"/>
+                    <path d="M9.5 15.5h5"/>
+                </svg>
+            </span>
+
+            <span class="account-item-text">
+                <strong>Daftarkan Toko</strong>
+                <small>Mulai berjualan di marketplace</small>
+            </span>
+
+            <span class="account-chevron">›</span>
+        </a>
+
+        <div class="account-divider"></div>
+
+        <button type="button" id="tombolLogout"
+                class="logout-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 17l5-5-5-5"/>
+                <path d="M15 12H3"/>
+                <path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/>
+            </svg>
+            Keluar
+        </button>
+
+    </div>
+
 </div>
-</div>
-</div>
+<!-- AKHIR MENU DROPDOWN AKUN -->
+
 
     </header>
 
@@ -252,12 +347,43 @@
 
         
 <!-- BANNER UTAMA -->
+
 <section class="hero">
-    <img
-        src="banner-pasar-nganjuk-online.png"
-        alt="Pasar Nganjuk Online - Belanja Produk Lokal Nganjuk"
-    >
+    <div class="hero-slider">
+
+        <div class="hero-slide active">
+            <img
+                src="banner-pasar-nganjuk-online.png"
+                alt="Pasar Nganjuk Online - Belanja Produk Lokal Nganjuk"
+            >
+        </div>
+
+        <div class="hero-slide">
+            <img
+                src="banner-promo-1.png"
+                alt="Promo Pasar Nganjuk Online"
+            >
+        </div>
+
+        <div class="hero-slide">
+            <img
+                src="banner-promo-2.png"
+                alt="Promosi Produk Lokal Nganjuk"
+            >
+        </div>
+
+    </div>
+
+    <button class="hero-prev" aria-label="Banner sebelumnya">&#10094;</button>
+    <button class="hero-next" aria-label="Banner berikutnya">&#10095;</button>
+
+    <div class="hero-dots">
+        <button class="active" aria-label="Banner 1"></button>
+        <button aria-label="Banner 2"></button>
+        <button aria-label="Banner 3"></button>
+    </div>
 </section>
+
 
 <!-- KATEGORI -->
 <section class="category-section" id="kategori">
@@ -266,42 +392,99 @@
     <div class="categories">
 
         <div class="category-item" data-category="Makanan & Minuman">
-            <div class="category-icon">🍜</div>
+            <div class="category-icon icon-makanan">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M12 29h40l-5 19H17z" fill="#F5A623"/>
+                    <path d="M10 27h44c-2 13-10 19-22 19S12 40 10 27z" fill="#E85D3F"/>
+                    <path d="M19 25c-4-8 7-12 11-5 3-9 16-6 15 2" fill="none" stroke="#65B84A" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M20 51h24" stroke="#A65D32" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </div>
             <p>Makanan & Minuman</p>
         </div>
 
         <div class="category-item" data-category="Fashion">
-            <div class="category-icon">👕</div>
+            <div class="category-icon icon-fashion">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M22 13l10 5 10-5 13 10-8 10-6-5v24H23V28l-6 5-8-10z" fill="#438CE8"/>
+                    <path d="M25 14c0 8 14 8 14 0" fill="none" stroke="#2463B5" stroke-width="3"/>
+                </svg>
+            </div>
             <p>Fashion</p>
         </div>
 
         <div class="category-item" data-category="Elektronik">
-            <div class="category-icon">📱</div>
+            <div class="category-icon icon-elektronik">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <rect x="18" y="7" width="28" height="50" rx="6" fill="#438CE8"/>
+                    <rect x="22" y="13" width="20" height="35" rx="2" fill="#DDF2FF"/>
+                    <circle cx="32" cy="52" r="2" fill="#FFFFFF"/>
+                    <path d="M27 20h10M27 26h10" stroke="#70B7E9" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
             <p>Elektronik</p>
         </div>
 
         <div class="category-item" data-category="Rumah Tangga">
-            <div class="category-icon">🏠</div>
+            <div class="category-icon icon-rumah">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M7 29L32 9l25 20" fill="none" stroke="#E69A35" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 27v27h36V27L32 13z" fill="#F5C66A"/>
+                    <rect x="26" y="37" width="12" height="17" rx="2" fill="#FFFFFF"/>
+                    <rect x="17" y="32" width="7" height="8" rx="1" fill="#FFFFFF"/>
+                    <rect x="40" y="32" width="7" height="8" rx="1" fill="#FFFFFF"/>
+                </svg>
+            </div>
             <p>Rumah Tangga</p>
         </div>
 
         <div class="category-item" data-category="Kecantikan">
-            <div class="category-icon">💄</div>
+            <div class="category-icon icon-kecantikan">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M24 9h16v9H24z" fill="#B86BCB"/>
+                    <path d="M21 18h22v36H21z" rx="5" fill="#F08CC6"/>
+                    <path d="M26 27h12v16H26z" rx="3" fill="#FFD9EB"/>
+                    <path d="M27 33h10" stroke="#D75B9E" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
             <p>Kecantikan</p>
         </div>
 
         <div class="category-item" data-category="Pertanian">
-            <div class="category-icon">🌾</div>
+            <div class="category-icon icon-pertanian">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M32 53V17" stroke="#388B45" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M32 34C12 34 10 18 12 12c16 0 23 8 20 22z" fill="#65B84A"/>
+                    <path d="M32 43c20 0 22-16 20-22-16 0-23 8-20 22z" fill="#8BCF58"/>
+                    <path d="M20 54h24" stroke="#A8753E" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </div>
             <p>Pertanian</p>
         </div>
 
         <div class="category-item" data-category="Otomotif">
-            <div class="category-icon">🚗</div>
+            <div class="category-icon icon-otomotif">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M13 35l5-14h28l7 14 3 4v11H8V39z" fill="#E85D3F"/>
+                    <path d="M22 24h20l5 11H17z" fill="#DDF2FF"/>
+                    <circle cx="19" cy="49" r="6" fill="#444B55"/>
+                    <circle cx="45" cy="49" r="6" fill="#444B55"/>
+                    <circle cx="19" cy="49" r="2.5" fill="#FFFFFF"/>
+                    <circle cx="45" cy="49" r="2.5" fill="#FFFFFF"/>
+                </svg>
+            </div>
             <p>Otomotif</p>
         </div>
 
         <div class="category-item" data-category="Lainnya">
-            <div class="category-icon">📦</div>
+            <div class="category-icon icon-lainnya">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M10 20l22-11 22 11-22 12z" fill="#F5B942"/>
+                    <path d="M10 20v25l22 12V32z" fill="#E69A35"/>
+                    <path d="M54 20v25L32 57V32z" fill="#D98527"/>
+                    <path d="M21 26l22-11" stroke="#FFF0C4" stroke-width="3"/>
+                </svg>
+            </div>
             <p>Lainnya</p>
         </div>
 
@@ -311,7 +494,6 @@
         <span>Lihat Semua Produk</span>
         <span>→</span>
     </button>
-
 </section>
 
 
@@ -359,25 +541,71 @@
 
 <!-- NAVIGASI KHUSUS HP -->
 <nav class="mobile-nav">
+
+    <!-- BERANDA -->
     <a href="index.html" class="active">
-        🏠<span>Beranda</span>
+        <svg viewBox="0 0 24 24">
+            <path d="M3 10.5L12 3l9 7.5"/>
+            <path d="M5 9.5V21h14V9.5"/>
+            <path d="M9 21v-7h6v7"/>
+        </svg>
+        <span>Beranda</span>
     </a>
+
+    <!-- CARI -->
     <a href="#searchInput">
-        🔎<span>Cari</span>
+        <svg viewBox="0 0 24 24">
+            <circle cx="10.8" cy="10.8" r="7"/>
+            <path d="M16 16l5 5"/>
+        </svg>
+        <span>Cari</span>
     </a>
+
+    <!-- KATEGORI -->
     <a href="#kategori">
-        📂<span>Kategori</span>
+        <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="8" height="8" rx="1.5"/>
+            <rect x="13" y="3" width="8" height="8" rx="1.5"/>
+            <rect x="3" y="13" width="8" height="8" rx="1.5"/>
+            <rect x="13" y="13" width="8" height="8" rx="1.5"/>
+        </svg>
+        <span>Kategori</span>
     </a>
+
+    <!-- KERANJANG -->
     <a href="keranjang.html">
-        🛒<span>Keranjang</span>
+        <svg viewBox="0 0 24 24">
+            <path d="M3 3h2l2.5 12.5h11L21 7H6"/>
+            <circle cx="10" cy="20" r="1.5"/>
+            <circle cx="18" cy="20" r="1.5"/>
+        </svg>
+        <span>Keranjang</span>
     </a>
+
+    <!-- CEK PESANAN -->
     <a href="riwayat-pesanan.html">
-        📦<span>Cek Pesanan</span>
+        <svg viewBox="0 0 24 24">
+            <path d="M4 7l8-4 8 4v10l-8 4-8-4z"/>
+            <path d="M4 7l8 4 8-4"/>
+            <path d="M12 11v10"/>
+            <path d="M9 5.5l8 4"/>
+        </svg>
+        <span>Cek Pesanan</span>
     </a>
+
+    <!-- JUALAN -->
     <a href="penjual.html">
-        🏪<span>Jualan</span>
+        <svg viewBox="0 0 24 24">
+            <path d="M3 10h18"/>
+            <path d="M5 10V21h14V10"/>
+            <path d="M3 10L5 3h16l2 7"/>
+            <path d="M9 21v-7h6v7"/>
+        </svg>
+        <span>Jualan</span>
     </a>
+
 </nav>
+
 
 
     <!-- FOOTER -->
