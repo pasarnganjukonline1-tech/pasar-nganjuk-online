@@ -48,7 +48,7 @@ async function simpanToko() {
 
         if (sessionError || !sessionData.session) {
             pesan.textContent = "Silakan login terlebih dahulu.";
-            window.location.href = "login-penjual.html";
+            window.location.href = "login-pengguna.html";
             return;
         }
 
@@ -120,8 +120,8 @@ console.log("PANJANG URL FOTO:", fotoURL?.length);
 console.log("BANNER:", JSON.stringify(bannerURL));
 console.log("PANJANG URL BANNER:", bannerURL?.length);
 
-console.log("JUMLAH URL FOTO:", (fotoURL.match(/https:\/\//g) || []).length);
-console.log("JUMLAH URL BANNER:", (bannerURL.match(/https:\/\//g) || []).length);
+console.log("JUMLAH URL FOTO:", (fotoURL?.match(/https:\/\//g) || []).length);
+console.log("JUMLAH URL BANNER:", (bannerURL?.match(/https:\/\//g) || []).length);
 
 
 // Simpan profil dan alamat gambar
@@ -162,7 +162,7 @@ async function muatProfilToko() {
             await supabaseClient.auth.getSession();
 
         if (sessionError || !sessionData.session) {
-            window.location.href = "login-penjual.html";
+            window.location.href = "login-pengguna.html";
             return;
         }
 
@@ -322,23 +322,32 @@ async function tambahProdukPenjual() {
             await supabaseClient.auth.getSession();
 
         if (sessionError || !sessionData.session) {
-            window.location.href = "login-penjual.html";
+            window.location.href = "login-pengguna.html";
             return;
         }
 
         const userId = sessionData.session.user.id;
 
         const { data: toko, error: tokoError } = await supabaseClient
-            .from("toko")
-            .select("id, nama_toko, lokasi")
-            .eq("user_id", userId)
-            .single();
+    .from("toko")
+    .select("id, nama_toko, lokasi, status, status_verifikasi")
+    .eq("user_id", userId)
+    .single();
 
         if (tokoError || !toko) {
             throw new Error(
                 "Profil toko belum ditemukan. Simpan profil toko terlebih dahulu."
             );
         }
+
+        if (
+    toko.status !== "aktif" ||
+    toko.status_verifikasi !== "Terverifikasi"
+) {
+    throw new Error(
+        "Toko belum aktif atau belum diverifikasi admin. Anda belum dapat menambahkan produk."
+    );
+}
 
         const namaFile = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
 
@@ -481,10 +490,17 @@ function tampilkanProdukPenjual() {
 // MENGUBAH STATUS PRODUK PENJUAL
 // =====================================
 
+
 async function ubahStatusProdukPenjual(index) {
     const item = produkPenjual[index];
 
     if (!item) return;
+
+    // Produk yang dinonaktifkan admin tidak boleh diaktifkan penjual.
+    if (item.status_admin !== "aktif") {
+        alert("Produk ini dinonaktifkan oleh admin. Hubungi admin untuk informasi lebih lanjut.");
+        return;
+    }
 
     const statusBaru =
         item.status === "aktif" ? "nonaktif" : "aktif";
@@ -495,21 +511,23 @@ async function ubahStatusProdukPenjual(index) {
 
     if (!yakin) return;
 
-    const { error } = await supabaseClient
-        .from("produk")
-        .update({ status: statusBaru })
-        .eq("id", item.id);
+    try {
+        const { error } = await supabaseClient
+            .from("produk")
+            .update({ status: statusBaru })
+            .eq("id", item.id);
 
-    if (error) {
+        if (error) throw error;
+
+        item.status = statusBaru;
+
+        tampilkanProdukPenjual();
+
+        alert("Status produk berhasil diubah.");
+    } catch (error) {
+        console.error("Gagal mengubah status:", error);
         alert("Gagal mengubah status: " + error.message);
-        return;
     }
-
-    item.status = statusBaru;
-
-    tampilkanProdukPenjual();
-
-    alert("Status produk berhasil diubah.");
 }
 
 
@@ -527,7 +545,7 @@ async function muatProdukPenjual() {
             await supabaseClient.auth.getSession();
 
         if (sessionError || !sessionData.session) {
-            window.location.href = "login-penjual.html";
+            window.location.href = "login-pengguna.html";
             return;
         }
 
@@ -704,7 +722,7 @@ async function muatPesananPenjual() {
             await supabaseClient.auth.getSession();
 
         if (sessionError || !sessionData.session) {
-            window.location.href = "login-penjual.html";
+            window.location.href = "login-pengguna.html";
             return;
         }
 
@@ -712,7 +730,7 @@ async function muatPesananPenjual() {
 
         const { data: toko, error: tokoError } = await supabaseClient
             .from("toko")
-            .select("id")
+            .select("id, status, status_verifikasi")
             .eq("user_id", userId)
             .single();
 
@@ -999,6 +1017,7 @@ async function pantauPesananBaru() {
         console.error("Gagal memantau pesanan:", error);
     }
 }
+
 
 muatProfilToko();
 muatProdukPenjual();

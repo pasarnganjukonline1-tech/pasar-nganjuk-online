@@ -394,6 +394,11 @@ function perbaruiKeranjang() {
         <strong>${formatRupiah(hitungTotal())}</strong>
     `;
 
+    // Perbarui indikator jumlah pada ikon keranjang
+document.querySelectorAll(".cart-count").forEach((badge) => {
+    badge.textContent = hitungJumlah();
+});
+
     const cartItems = document.getElementById("cartItems");
 
     if (keranjang.length === 0) {
@@ -863,10 +868,9 @@ created_at: item.created_at
     }
 }
 
-// ===================================
-// AMBIL TOKO AKTIF DARI SUPABASE
-// ===================================
-
+// =====================================
+// AMBIL TOKO AKTIF
+// =====================================
 async function ambilTokoAktif() {
     const areaToko = document.getElementById("popularStores");
 
@@ -875,7 +879,7 @@ async function ambilTokoAktif() {
     try {
         const { data, error } = await supabaseClient
             .from("toko")
-            .select("id, nama_toko, deskripsi, status")
+           .select("id, nama_toko, nama_pemilik, lokasi, deskripsi, foto_toko_url, status")
             .eq("status", "aktif")
             .order("created_at", { ascending: false });
 
@@ -888,11 +892,44 @@ async function ambilTokoAktif() {
             return;
         }
 
-        data.forEach(item => {
-            const kartu = document.createElement("div");
-            kartu.textContent = "🏪 " + item.nama_toko;
-            areaToko.appendChild(kartu);
-        });
+        
+data.forEach(item => {
+    const kartu = document.createElement("a");
+
+    kartu.href = "toko.html?id=" + encodeURIComponent(item.id);
+    kartu.className = "kartu-toko-populer";
+
+    const foto = document.createElement("img");
+    foto.src = item.foto_toko_url || "";
+    foto.alt = "Foto " + item.nama_toko;
+    foto.className = "foto-toko-populer";
+
+    if (!item.foto_toko_url) {
+        foto.style.display = "none";
+    }
+
+    const informasi = document.createElement("div");
+    informasi.className = "info-toko-populer";
+
+    const nama = document.createElement("h3");
+    nama.textContent = item.nama_toko;
+
+    const lokasi = document.createElement("p");
+    lokasi.textContent = "📍 " + (item.lokasi || "Nganjuk");
+
+    const deskripsi = document.createElement("p");
+    deskripsi.textContent = item.deskripsi || "Belum ada deskripsi toko.";
+
+    informasi.appendChild(nama);
+    informasi.appendChild(lokasi);
+    informasi.appendChild(deskripsi);
+
+    kartu.appendChild(foto);
+    kartu.appendChild(informasi);
+
+    areaToko.appendChild(kartu);
+});
+
 
     } catch (error) {
         console.error("Gagal mengambil toko:", error.message);
@@ -907,9 +944,7 @@ async function ambilTokoAktif() {
 tampilkanProduk(produk);
 perbaruiKeranjang();
 
-
 if (typeof supabaseClient !== "undefined") {
     ambilProdukSupabase();
     ambilTokoAktif();
 }
-

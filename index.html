@@ -37,29 +37,125 @@
     <header class="main-header">
 
        
-<div class="logo">
-    <div class="logo-icon">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 12h7l6 30h29l7-22H19"
-                fill="none"
-                stroke="white"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
-            <circle cx="27" cy="51" r="4" fill="white"/>
-            <circle cx="47" cy="51" r="4" fill="white"/>
-            <path d="M25 27h22"
-                stroke="white"
-                stroke-width="3"
-                stroke-linecap="round"/>
-        </svg>
-    </div>
 
-    <div class="logo-text">
-        <h1>Pasar Nganjuk <span>Online</span></h1>
-        <small>Belanja Mudah, Lokal Mendunia</small>
-    </div>
+<div class="pasar-logo">
+  <svg class="pasar-logo-svg"
+       viewBox="0 0 1826 382"
+       xmlns="http://www.w3.org/2000/svg"
+       role="img"
+       aria-label="Pasar Nganjuk Online - Belanja Mudah, Lokal Mendunia">
+
+    <!-- Latar belakang -->
+    <rect width="1826" height="382" fill="#f3faff"/>
+
+    <!-- Badan tas -->
+    <path d="
+      M135 70
+      H321
+      Q344 70 344 94
+      V267
+      Q344 286 326 286
+      H132
+      Q112 286 112 265
+      V94
+      Q112 70 135 70 Z"
+      fill="#0785d7"/>
+
+    <!-- Bagian samping bawah tas -->
+    <path d="
+      M242 242
+      L344 230
+      L354 290
+      Q357 313 337 315
+      L263 315
+      Q248 314 240 302 Z"
+      fill="#55b6e9"/>
+
+    <!-- Pegangan tas -->
+    <path d="
+      M180 104
+      V68
+      C180 28 200 5 228 5
+      C261 5 280 31 280 69
+      V105"
+      fill="none"
+      stroke="#75bdf0"
+      stroke-width="15"
+      stroke-linecap="round"/>
+
+    <!-- Huruf N -->
+    <text x="228" y="238"
+          text-anchor="middle"
+          font-family="Arial, sans-serif"
+          font-size="150"
+          font-weight="bold"
+          fill="#ffffff">N</text>
+
+    <!-- Aksen hijau -->
+    <path d="
+      M99 198
+      C72 224 93 263 135 286
+      C204 326 300 303 356 239
+      C372 221 378 192 378 164
+      C345 212 300 240 248 251
+      C188 264 133 252 99 198 Z"
+      fill="#65c934"/>
+
+    <!-- Garis aksen tas -->
+    <path d="
+      M101 198
+      C130 244 191 263 248 251
+      C301 240 346 211 378 164"
+      fill="none"
+      stroke="#ffffff"
+      stroke-width="5"
+      opacity="0.65"/>
+
+    <!-- Nama Pasar Nganjuk -->
+    <text x="414" y="163"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="139"
+          font-weight="bold"
+          letter-spacing="-5"
+          fill="#07477f">Pasar Nganjuk</text>
+
+    <!-- Tulisan Online -->
+    <text x="1290" y="163"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="139"
+          font-weight="bold"
+          font-style="italic"
+          letter-spacing="-5"
+          fill="#087fd0">Online</text>
+
+    <!-- Slogan -->
+    <text x="786" y="300"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="65"
+          font-weight="400"
+          letter-spacing="-1"
+          fill="#07477f">Belanja Mudah, Lokal Mendunia</text>
+
+  </svg>
 </div>
+
+<style>
+.pasar-logo {
+    display: block;
+    width: 100%;
+    max-width: 390px;
+    flex: 0 1 390px;
+    min-width: 0;
+    margin: 0;
+}
+
+.pasar-logo-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+</style>
+
 
 
         <div class="search-urutan-wrapper">
@@ -83,26 +179,74 @@
     </div>
 
 </div>
-
 <div class="header-actions">
-    <a href="keranjang.html">🛒 Keranjang</a>
-    <a href="#">👤 Masuk / Daftar</a>
+
+    <!-- KERANJANG -->
+   <a href="keranjang.html" title="Keranjang" class="cart-link">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="24" height="24"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/>
+        <circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+    <span id="cart-count" class="cart-count">0</span>
+</a>
+
+<!-- MENU AKUN -->
+<div class="account-menu">
+    <button type="button"
+        class="action-link account-icon"
+        aria-label="Menu akun"
+        aria-expanded="false"
+        onclick="
+            const menu = document.getElementById('menuAkun');
+            menu.hidden = !menu.hidden;
+            this.setAttribute('aria-expanded', !menu.hidden);
+        ">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="24" height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
+        </svg>
+    </button>
+
+    <div id="menuAkun" class="account-dropdown" hidden>
+    <strong>Akun Pengguna</strong>
+    <a href="login-pengguna.html">👤 Masuk / Daftar Pengguna</a>
+
+    <hr>
+
+    <strong>Area Penjual</strong>
+    <a href="penjual.html">🏪 Dashboard Penjual</a>
+    <a href="penjual.html">➕ Daftarkan Toko</a>
+</div>
+</div>
 </div>
 
     </header>
 
-    <!-- NAVIGASI DESKTOP -->
+  
+<!-- NAVIGASI DESKTOP -->
 <nav class="main-nav">
-    <a href="#">☰ Semua Kategori</a>
-    <a href="#" class="active">⌂ Beranda</a>
-    <a href="#">Produk Terlaris</a>
-    <a href="#">Promo</a>
-    <a href="#">Toko Populer</a>
-    <a href="#">Kategori Lainnya</a>
+    <a href="#kategori">☰ Semua Kategori</a>
+    <a href="index.html" class="active">⌂ Beranda</a>
+    <a href="#produk-terlaris">Produk Terlaris</a>
+    <a href="#promo">Promo</a>
+    <a href="#toko-populer">Toko Populer</a>
+    <a href="#kategori">Kategori Lainnya</a>
     <a href="riwayat-pesanan.html">📦 Cek Pesanan</a>
-
-    <!-- MENU PENJUAL -->
-    <a href="penjual.html">🏪 Jualan di Sini</a>
 </nav>
     <main>
 
@@ -115,10 +259,8 @@
     >
 </section>
 
-
-
 <!-- KATEGORI -->
-<section class="category-section">
+<section class="category-section" id="kategori">
     <h2>Kategori Pilihan</h2>
 
     <div class="categories">
@@ -176,7 +318,7 @@
         <!-- KONTEN MARKETPLACE -->
         <section class="marketplace-content">
 
-            <div class="product-section">
+           <div class="product-section" id="produk-terlaris">
                 <div class="section-title">
                     <h2>⭐ Produk Terbaru</h2>
                     <a href="#">Lihat Semua →</a>
@@ -187,7 +329,7 @@
                 </div>
             </div>
 
-            <div class="promo-section">
+            <div class="promo-section" id="promo">
                 <div class="section-title">
                     <h2>Promo Pilihan</h2>
                 </div>
@@ -199,7 +341,7 @@
                 </div>
             </div>
 
-            <div class="store-section">
+            <div class="store-section" id="toko-populer">
                 <div class="section-title">
                     <h2>Toko Populer</h2>
                 </div>
@@ -214,15 +356,29 @@
         </section>
 
     </main>
+
 <!-- NAVIGASI KHUSUS HP -->
 <nav class="mobile-nav">
-    <a href="#" class="active">🏠<span>Beranda</span></a>
-    <a href="#">🔎<span>Cari</span></a>
-    <a href="#">📂<span>Kategori</span></a>
-    <a href="keranjang.html">🛒<span>Keranjang</span></a>
-    <a href="riwayat-pesanan.html">📦<span>Cek Pesanan</span></a>
-    <a href="penjual.html">🏪<span>Jualan</span></a>
+    <a href="index.html" class="active">
+        🏠<span>Beranda</span>
+    </a>
+    <a href="#searchInput">
+        🔎<span>Cari</span>
+    </a>
+    <a href="#kategori">
+        📂<span>Kategori</span>
+    </a>
+    <a href="keranjang.html">
+        🛒<span>Keranjang</span>
+    </a>
+    <a href="riwayat-pesanan.html">
+        📦<span>Cek Pesanan</span>
+    </a>
+    <a href="penjual.html">
+        🏪<span>Jualan</span>
+    </a>
 </nav>
+
 
     <!-- FOOTER -->
     <footer>
@@ -233,6 +389,35 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
 <script src="script.js"></script>
+
+
+
+<script>
+document.addEventListener("click", function(event) {
+    const semuaMenu = document.querySelectorAll(".account-menu");
+
+    semuaMenu.forEach(function(menu) {
+        if (!menu.contains(event.target)) {
+            const dropdown = menu.querySelector(".account-dropdown");
+
+            if (dropdown) {
+                dropdown.hidden = true;
+            }
+        }
+    });
+});
+
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        document.querySelectorAll(".account-dropdown").forEach(function(menu) {
+            menu.hidden = true;
+        });
+    }
+});
+
+</script>
+
 
 </body>
 </html>

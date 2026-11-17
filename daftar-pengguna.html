@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daftar Pengguna - Pasar Nganjuk Online</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #eaf4ff, #f5f9ff);
+            font-family: Arial, sans-serif;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 35px 30px;
+            box-sizing: border-box;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(7, 89, 165, 0.12);
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .auth-logo h1 {
+            margin: 0;
+            color: #0759a5;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .auth-logo span {
+            color: #65c934;
+        }
+
+        .auth-logo p {
+            margin: 7px 0 0;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .auth-container h2 {
+            margin: 0 0 8px;
+            color: #183b5b;
+            font-size: 23px;
+            text-align: center;
+        }
+
+        .auth-description {
+            margin: 0 0 25px;
+            color: #718096;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .auth-container label {
+            display: block;
+            margin: 15px 0 7px;
+            color: #34495e;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .auth-container input {
+            width: 100%;
+            height: 46px;
+            padding: 0 13px;
+            box-sizing: border-box;
+            border: 1px solid #d8e2ed;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .auth-container input:focus {
+            border-color: #0759a5;
+            box-shadow: 0 0 0 3px rgba(7, 89, 165, 0.10);
+        }
+
+        .auth-container button {
+            width: 100%;
+            height: 47px;
+            margin-top: 23px;
+            border: none;
+            border-radius: 9px;
+            background: #0759a5;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .auth-container button:hover {
+            background: #06477f;
+        }
+
+        .auth-container button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        #pesan {
+            min-height: 18px;
+            margin: 14px 0;
+            color: #d93025;
+            font-size: 13px;
+            text-align: center;
+            overflow-wrap: anywhere;
+        }
+
+        #pesan.berhasil {
+            color: #16803c;
+        }
+
+        .auth-register {
+            margin: 18px 0;
+            color: #64748b;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .auth-container a {
+            color: #0759a5;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .auth-container a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-back {
+            display: block;
+            margin-top: 25px;
+            padding-top: 18px;
+            border-top: 1px solid #edf1f5;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 28px 22px;
+            }
+
+            .auth-logo h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-logo">
+            <h1>Pasar Nganjuk <span>Online</span></h1>
+            <p>Belanja Mudah, Lokal Mendunia</p>
+        </div>
+
+        <h2>Buat Akun Baru</h2>
+
+        <p class="auth-description">
+            Daftar sekarang dan mulai berbelanja.
+        </p>
+
+        <label for="email">Alamat Email</label>
+        <input
+            type="email"
+            id="email"
+            placeholder="nama@email.com"
+            autocomplete="email"
+            required
+        >
+
+        <label for="password">Password</label>
+        <input
+            type="password"
+            id="password"
+            placeholder="Minimal 6 karakter"
+            autocomplete="new-password"
+            required
+        >
+
+        <button type="button" id="tombolDaftar" onclick="daftarPengguna()">
+            Daftar Sekarang
+        </button>
+
+        <p id="pesan" aria-live="polite"></p>
+
+        <p class="auth-register">
+            Sudah punya akun?
+            <a href="login-pengguna.html">Masuk di sini</a>
+        </p>
+
+        <a class="auth-back" href="index.html">
+            ← Kembali ke Beranda
+        </a>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+
+    <script>
+        async function daftarPengguna() {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const pesan = document.getElementById("pesan");
+            const tombol = document.getElementById("tombolDaftar");
+
+            pesan.textContent = "";
+            pesan.classList.remove("berhasil");
+
+            if (!email || password.length < 6) {
+                pesan.textContent =
+                    "Masukkan email dan password minimal 6 karakter.";
+                return;
+            }
+
+            tombol.disabled = true;
+            tombol.textContent = "Sedang mendaftar...";
+
+            try {
+                const { error } = await supabaseClient.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        emailRedirectTo:
+                            window.location.origin + "/index.html"
+                    }
+                });
+
+                if (error) {
+                    pesan.textContent = error.message;
+                    return;
+                }
+
+                pesan.textContent =
+                    "Pendaftaran berhasil. Silakan periksa email untuk konfirmasi akun.";
+
+                pesan.classList.add("berhasil");
+
+            } catch (error) {
+                pesan.textContent =
+                    "Terjadi kesalahan. Silakan coba kembali.";
+
+                console.error(error);
+
+            } finally {
+                tombol.disabled = false;
+                tombol.textContent = "Daftar Sekarang";
+            }
+        }
+    </script>
+
+</body>
+</html>
