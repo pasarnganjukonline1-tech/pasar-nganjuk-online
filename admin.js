@@ -14,7 +14,7 @@ const btnDashboard = document.getElementById("btnDashboard");
 const btnPesanan = document.getElementById("btnPesanan");
 const btnMenuToko = document.getElementById("btnMenuToko");
 const btnMenuProduk = document.getElementById("btnMenuProduk");
-
+const btnBanner = document.getElementById("btnBanner");
 // Memuat statistik dashboard admin
 async function muatStatistikAdmin() {
     const { count: jumlahToko, error: errorToko } = await supabase
@@ -538,6 +538,12 @@ btnPesanan.addEventListener("click", () => {
     aturMenuAktif(btnPesanan);
     tampilkanPesanan();
 });
+
+btnBanner.addEventListener("click", () => {
+    aturMenuAktif(btnBanner);
+    tampilkanBannerPromosi();
+});
+
 btnMenuToko.addEventListener("click", tampilkanToko);
 btnMenuProduk.addEventListener("click", tampilkanProduk);
 
@@ -754,6 +760,149 @@ tombolSimpan.addEventListener("click", async () => {
 });
     });
 }
+
+
+// Menampilkan daftar promosi banner untuk Admin
+async function tampilkanBannerPromosi() {
+    areaAdmin.innerHTML = `
+        <h3>Kelola Promosi Banner</h3>
+        <p>Memuat banner dari penjual...</p>
+    `;
+
+    const { data: banner, error } = await supabase
+        .from("promosi_banner")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        areaAdmin.innerHTML = `
+            <h3>Kelola Promosi Banner</h3>
+            <p>Gagal memuat banner: ${error.message}</p>
+        `;
+        return;
+    }
+
+    if (!banner || banner.length === 0) {
+        areaAdmin.innerHTML = `
+            <h3>Kelola Promosi Banner</h3>
+            <p>Belum ada banner yang dikirim penjual.</p>
+        `;
+        return;
+    }
+
+    const { data: semuaToko, error: errorToko } = await supabase
+        .from("toko")
+        .select("id, nama_toko");
+
+    if (errorToko) {
+        areaAdmin.innerHTML = `
+            <h3>Kelola Promosi Banner</h3>
+            <p>Gagal mengambil data toko: ${errorToko.message}</p>
+        `;
+        return;
+    }
+
+    const petaToko = new Map(
+        (semuaToko || []).map(toko => [toko.id, toko.nama_toko])
+    );
+
+    areaAdmin.innerHTML = `
+        <h3>Kelola Promosi Banner (${banner.length})</h3>
+        <div id="daftarBannerAdmin"></div>
+    `;
+
+    const daftar = document.getElementById("daftarBannerAdmin");
+
+    banner.forEach(item => {
+        const kartu = document.createElement("div");
+
+        kartu.style.border = "1px solid #ddd";
+        kartu.style.padding = "15px";
+        kartu.style.margin = "12px 0";
+        kartu.style.borderRadius = "10px";
+
+        const gambar = document.createElement("img");
+        gambar.src = item.gambar_url;
+        gambar.alt = "Banner promosi";
+        gambar.style.width = "100%";
+        gambar.style.maxWidth = "500px";
+        gambar.style.display = "block";
+        gambar.style.borderRadius = "8px";
+        gambar.style.marginBottom = "12px";
+
+        const judul = document.createElement("h3");
+        judul.textContent = item.judul || "-";
+
+        const toko = document.createElement("p");
+        toko.textContent =
+            "Nama Toko: " + (petaToko.get(item.toko_id) || "-");
+
+        const deskripsi = document.createElement("p");
+        deskripsi.textContent = item.deskripsi || "-";
+
+        const status = document.createElement("p");
+        status.textContent = "Status: " + item.status;
+
+        const tanggal = document.createElement("p");
+        tanggal.textContent =
+            "Tanggal: " + new Date(item.created_at).toLocaleString("id-ID");
+
+        kartu.append(gambar, judul, toko, deskripsi, status, tanggal);
+
+        if (item.status === "menunggu") {
+            const tombolSetuju = document.createElement("button");
+            tombolSetuju.textContent = "Setujui";
+            tombolSetuju.style.background = "#168a45";
+            tombolSetuju.style.color = "white";
+            tombolSetuju.style.marginRight = "8px";
+
+            const tombolTolak = document.createElement("button");
+            tombolTolak.textContent = "Tolak";
+            tombolTolak.style.background = "#d93636";
+            tombolTolak.style.color = "white";
+
+            async function ubahStatus(statusBaru, tombol) {
+                if (!confirm(
+                    `Yakin ingin mengubah status banner menjadi ${statusBaru}?`
+                )) {
+                    return;
+                }
+
+                tombol.disabled = true;
+                tombol.textContent = "Memproses...";
+
+                const { error: errorUpdate } = await supabase
+                    .from("promosi_banner")
+                    .update({ status: statusBaru })
+                    .eq("id", item.id);
+
+                if (errorUpdate) {
+                    alert("Gagal mengubah status: " + errorUpdate.message);
+                    tombol.disabled = false;
+                    tombol.textContent =
+                        statusBaru === "disetujui" ? "Setujui" : "Tolak";
+                    return;
+                }
+
+                alert("Status banner berhasil diperbarui.");
+                tampilkanBannerPromosi();
+            }
+
+            tombolSetuju.addEventListener("click", () => {
+                ubahStatus("disetujui", tombolSetuju);
+            });
+
+            tombolTolak.addEventListener("click", () => {
+                ubahStatus("ditolak", tombolTolak);
+            });
+
+            kartu.append(tombolSetuju, tombolTolak);
+        }
+
+        daftar.appendChild(kartu);
+    });
+}
+
 
 // Mengatur menu sidebar yang sedang aktif
 function aturMenuAktif(tombolAktif) {
